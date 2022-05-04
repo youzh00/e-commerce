@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Navbar, Nav } from "react-bootstrap";
 import style from "../Styles/Header.module.css";
-
+import {LinkContainer} from "react-router-bootstrap"
 const Header = () => {
   return (
     <header>
@@ -12,20 +12,27 @@ const Header = () => {
         className={style.navbar}
       >
         <Container>
-          <Navbar.Brand href="/">INPT-SHOP</Navbar.Brand>
+          <LinkContainer to="/">
+            <Navbar.Brand >INPT-SHOP</Navbar.Brand>
+          </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse
             id="basic-navbar-nav"
             className="justify-content-end"
           >
             <Nav className="ml-auto">
-              <Nav.Link href="/cart" className={style.cart}>
-                <i className="fas fa-shopping-cart"></i>
-                Cart
-              </Nav.Link>
-              <Nav.Link href="/login" className={style.login}>
-                <i className="fas fa-user"></i>Sign In
-              </Nav.Link>
+              <LinkContainer to="/cart">
+                  <Nav.Link  className={style.cart}>
+                    <i className="fas fa-shopping-cart"></i>
+                    Cart
+                  </Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/login">
+                  <Nav.Link  className={style.login}>
+                    <i className="fas fa-user"></i>Sign In
+                  </Nav.Link>
+              </LinkContainer>
+              
             </Nav>
           </Navbar.Collapse>
         </Container>
