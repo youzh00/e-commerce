@@ -16,8 +16,7 @@ export const ProductScreen = () => {
       setProduct(data);
     };
     fetchProducts();
-    console.log(product.rating);
-  }, []);
+  }, [id]);
   return (
     <>
       <Link className="btn btn-dark my-3 rounded" to="/">

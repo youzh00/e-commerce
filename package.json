@@ -4,7 +4,10 @@
   "description": "e-commerce school project",
   "main": "index.js",
   "scripts": {
-    "start": " node backend/index"
+    "start": " node backend/index",
+    "server": " nodemon backend/index",
+    "fr": "npm start --prefix frontend",
+    "dev": "concurrently  \"npm run server\" \"npm run fr \""
   },
   "repository": {
     "type": "git",
@@ -17,6 +20,10 @@
   },
   "homepage": "https://github.com/youzh00/e-commerce#readme",
   "dependencies": {
+    "dotenv": "^16.0.0",
     "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "concurrently": "^7.1.0"
   }
 }

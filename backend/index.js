@@ -1,7 +1,9 @@
 //!--------------Requirement---------------//
 const express = require("express");
 const products = require("./data/products");
+const dotenv = require("dotenv");
 const app = express();
+dotenv.config();
 const port = process.env.PORT || 5000;
 
 //!-------------Code part------------------//
