@@ -1,0 +1,22 @@
+{
+  "name": "e-commerce",
+  "version": "1.0.0",
+  "description": "e-commerce school project",
+  "main": "index.js",
+  "scripts": {
+    "start": " node backend/index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/youzh00/e-commerce.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/youzh00/e-commerce/issues"
+  },
+  "homepage": "https://github.com/youzh00/e-commerce#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
