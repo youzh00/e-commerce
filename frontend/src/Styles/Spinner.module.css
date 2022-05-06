@@ -1,0 +1,16 @@
+.Spinner {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Loading {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgba(57, 150, 172, 1) !important;
+  font-style: italic;
+}
