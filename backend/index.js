@@ -1,3 +1,5 @@
+const print = (args) => console.log(args);
+
 //!--------------Requirement---------------//
 const express = require("express");
 const products = require("./data/products");
@@ -5,9 +7,11 @@ const dotenv = require("dotenv");
 const app = express();
 dotenv.config();
 const port = process.env.PORT || 5000;
+const connect = require("./DB_Config/dataBase");
+const colors = require("colors");
 
 //!-------------Code part------------------//
-
+connect();
 app.get("/", (req, res) => {
   res.send("hahahhahaa");
 });
@@ -22,5 +26,5 @@ app.get("/api/products/:id", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`your server runnning up on ${port}`);
+  print(`your server runnning up on ${port}`.yellow.bold);
 });
