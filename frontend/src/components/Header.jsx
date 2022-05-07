@@ -12,9 +12,9 @@ const Header = () => {
         className={style.navbar}
       >
         <Container>
-          <LinkContainer to="/">
+          <a href="/">
             <Navbar.Brand >INPT-SHOP</Navbar.Brand>
-          </LinkContainer>
+          </a>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse
             id="basic-navbar-nav"
