@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import Product from "../components/Product";
-import Message from "../components/Message";
+import Error from "../components/Error";
 import { useDispatch, useSelector } from "react-redux";
 import { productsList } from "../actions/productActions";
 import Spinner from "../components/Spinner";
@@ -11,8 +11,7 @@ import Spinner from "../components/Spinner";
 //!-------------Component Part-------------//
 export const HomeScreen = () => {
   const dispatch = useDispatch();
-  const productList = useSelector((state) => state.products);
-  const { loading, error, products } = productList;
+  const { loading, error, products } = useSelector((state) => state.products);
   useEffect(() => {
     dispatch(productsList());
   }, [dispatch]);
@@ -29,7 +28,7 @@ export const HomeScreen = () => {
     return (
       <>
         <h1> Latest Products </h1>
-        <Message variant="danger">{error}</Message>;
+        <Error variant="danger">{error}</Error>;
       </>
     );
   }

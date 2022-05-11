@@ -1,6 +1,6 @@
 import React from 'react'
 import {Alert} from 'react-bootstrap'
- const Message = ({variant,children}) => {
+ const Error = ({variant,children}) => {
   return (
     <Alert variant={variant} >
         {children}
@@ -8,7 +8,7 @@ import {Alert} from 'react-bootstrap'
   )
 }
 
-Message.defaultProps = {
+Error.defaultProps = {
     variant:'info',
 }
-export default Message
+export default Error
