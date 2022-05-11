@@ -10,9 +10,9 @@ const connect = async () => {
       useUnifiedTopology: true,
       useNewUrlParser: true,
     });
-    print(`MongoDb Connected: ${cnxDb.connection.host}`.yellow.underline);
+    print(`MongoDb Connected: ${cnxDb.connection.host}`.yellow);
   } catch (error) {
-    print(error.red.underline.bold);
+    print(error.red.bold);
   }
 };
 module.exports = connect;
