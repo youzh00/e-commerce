@@ -16,22 +16,31 @@ export const HomeScreen = () => {
   useEffect(() => {
     dispatch(productsList());
   }, [dispatch]);
-  return (
-    <>
-      <h1> Latest Products </h1>
-      {loading ? (
+
+  if (loading) {
+    return (
+      <>
+        <h1> Latest Products </h1>
         <Spinner />
-      ) : error ? (
-        <Error variant="danger">{error}</Error>
-      ) : (
-        <Row>
-          {products.map((product) => (
-            <Col sm={12} md={6} lg={4} xl={3} key={product._id}>
-              <Product product={product} />
-            </Col>
-          ))}
-        </Row>
-      )}
-    </>
+      </>
+    );
+  }
+  if (error) {
+    return (
+      <>
+        <h1> Latest Products </h1>
+        <Error variant="danger">{error}</Error>;
+      </>
+    );
+  }
+
+  return (
+    <Row>
+      {products.map((product) => (
+        <Col sm={12} md={6} lg={4} xl={3} key={product._id}>
+          <Product product={product} />
+        </Col>
+      ))}
+    </Row>
   );
 };
