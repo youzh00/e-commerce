@@ -14,12 +14,12 @@ import {
 } from "react-bootstrap";
 import Rating from "../components/Rating";
 import Spinner from "../components/Spinner";
-import Error from "../components/Error";
+import Message from "../components/Message";
 
 //!------------------Component Part--------------------//
 export const ProductScreen = () => {
   const navigate = useNavigate();
-  const [qty, setQty] = useState();
+  const [qty, setQty] = useState(1);
   const { id } = useParams();
   const dispatch = useDispatch();
   const listProductDetails = useSelector((state) => state.product);
@@ -27,8 +27,6 @@ export const ProductScreen = () => {
   useEffect(() => {
     dispatch(productDetails(id));
   }, [id, dispatch]);
-  console.log(product.countInStock);
-  console.log(`qty: ${qty}`);
   const addToCartHandler = () => {
     navigate(`/cart/${id}?qty=${qty}`);
   };
@@ -40,7 +38,7 @@ export const ProductScreen = () => {
       {loading ? (
         <Spinner />
       ) : error ? (
-        <Error variant="danger">{error}</Error>
+        <Message variant="danger">{error}</Message>
       ) : (
         <Row>
           <Col md={6}>

@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Navbar, Nav } from "react-bootstrap";
 import style from "../Styles/Header.module.css";
 import {LinkContainer} from "react-router-bootstrap"
+import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <header>

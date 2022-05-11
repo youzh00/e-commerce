@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import Product from "../components/Product";
-import Error from "../components/Error";
+import Message from "../components/Message";
 import { useDispatch, useSelector } from "react-redux";
 import { productsList } from "../actions/productActions";
 import Spinner from "../components/Spinner";
@@ -29,7 +29,7 @@ export const HomeScreen = () => {
     return (
       <>
         <h1> Latest Products </h1>
-        <Error variant="danger">{error}</Error>;
+        <Message variant="danger">{error}</Message>;
       </>
     );
   }
