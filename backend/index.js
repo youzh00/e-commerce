@@ -10,11 +10,15 @@ const port = process.env.PORT || 5000;
 const connectDB = require("./config/db");
 const colors = require("colors");
 const productsRouter = require("./routes/productsRoutes");
+const userRouter = require("./routes/userRoutes");
 const { notFound, errorHandler } = require("./middleware/errorMidlleware");
 
 //!-------------Code part------------------//
 
+app.use(express.json());
+
 app.use("/products", productsRouter);
+app.use("/users", userRouter);
 app.use(notFound);
 app.use(errorHandler);
 

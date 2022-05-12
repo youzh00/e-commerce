@@ -11,8 +11,7 @@ import Spinner from "../components/Spinner";
 //!-------------Component Part-------------//
 export const HomeScreen = () => {
   const dispatch = useDispatch();
-  const productList = useSelector((state) => state.products);
-  const { loading, error, products } = productList;
+  const { loading, error, products } = useSelector((state) => state.products);
   useEffect(() => {
     dispatch(productsList());
   }, [dispatch]);
