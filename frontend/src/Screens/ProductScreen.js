@@ -19,7 +19,7 @@ import Message from "../components/Message";
 //!------------------Component Part--------------------//
 export const ProductScreen = () => {
   const navigate = useNavigate();
-  const [qty, setQty] = useState();
+  const [qty, setQty] = useState(1);
   const { id } = useParams();
   const dispatch = useDispatch();
   const listProductDetails = useSelector((state) => state.product);
@@ -27,7 +27,7 @@ export const ProductScreen = () => {
   useEffect(() => {
     dispatch(productDetails(id));
   }, [id, dispatch]);
-  console.log(product.countInStock);
+  console.log(product.rating);
   console.log(`qty: ${qty}`);
   const addToCartHandler = () => {
     navigate(`/cart/${id}?qty=${qty}`);
@@ -54,7 +54,7 @@ export const ProductScreen = () => {
               <ListGroup.Item>
                 <Rating
                   value={product.rating}
-                  text={`${product.numReviews} reviews`}
+                  text={`${Number(product.reviews.length)} reviews`}
                 />
               </ListGroup.Item>
               <ListGroup.Item>

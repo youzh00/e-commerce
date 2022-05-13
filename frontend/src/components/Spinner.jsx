@@ -1,23 +1,19 @@
-import React from 'react'
+import React from "react";
 import { SpinnerDotted } from "spinners-react";
 import style from "../Styles/Spinner.module.css";
 
-
- const Spinner = () => {
+const Spinner = () => {
   return (
     <>
-    <div className={style.Spinner}> 
+      <div className={style.Spinner}>
         <SpinnerDotted
-            size={90}
-            thickness={180}
-            speed={104}
-            color="rgba(57, 150, 172, 1)"
+          size={90}
+          thickness={180}
+          speed={104}
+          color="rgba(57, 150, 172, 1)"
         />
-    </div>
-    <div className={style.Loading}>
-        <h3>Loding...</h3>
-    </div>
+      </div>
     </>
-  )
-}
-export default Spinner
+  );
+};
+export default Spinner;

@@ -43,6 +43,7 @@ const CartScreen = () => {
   const checkoutHandler = () => {
     navigate("/login?redirect=shipping");
   };
+  console.log(cartItems);
 
   return (
     <Row>
@@ -102,13 +103,17 @@ const CartScreen = () => {
             <ListGroup.Item>
               <h2>
                 Subtotal (
-                {cartItems.reduce((acc, item) => acc + Number(item.qty), 0)})
-                items
+                {cartItems.reduce(
+                  (acc, item) => Number(acc) + Number(item.qty),
+                  0
+                )}
+                ) items
               </h2>
               $
               {cartItems
                 .reduce(
-                  (acc, item) => acc + Number(item.qty) * Number(item.price),
+                  (acc, item) =>
+                    Number(acc) + Number(item.qty) * Number(item.price),
                   0
                 )
                 .toFixed(2)}
