@@ -29,7 +29,7 @@ export const productsList = () => async (dispatch) => {
 export const productDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
-    const { data } = await axios.get(`/products/${id}`);
+    const { data } = await axios.get(`http://localhost:5000/products/${id}`);
     dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({

@@ -18,22 +18,6 @@ const authUser = async (req, res) => {
   }
 };
 
-const getUserProfile = async (req, res) => {
-  const user = await User.findById(req.user._id);
-
-  if (user) {
-    res.json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      isAdmin: user.isAdmin,
-    });
-  } else {
-    res.status(404);
-    throw Error("User not found");
-  }
-};
-
 const registerUser = async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -64,4 +48,43 @@ const registerUser = async (req, res) => {
   }
 };
 
-module.exports = { authUser, getUserProfile, registerUser };
+const getUserProfile = async (req, res) => {
+  const user = await User.findById(req.user._id);
+
+  if (user) {
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+    });
+  } else {
+    res.status(404);
+    throw Error("User not found");
+  }
+};
+
+const updateUserProfile = async (req, res) => {
+  const user = await User.findById(req.user._id);
+
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    user.password = req.body.password || user.password;
+
+    const updateUser = await user.save();
+
+    res.json({
+      _id: updateUser._id,
+      name: updateUser.name,
+      email: updateUser.email,
+      isAdmin: updateUser.isAdmin,
+      token: updateUser.generateToken(updateUser._id),
+    });
+  } else {
+    res.status(404);
+    throw Error("User not found");
+  }
+};
+
+module.exports = { authUser, registerUser, getUserProfile, updateUserProfile };
