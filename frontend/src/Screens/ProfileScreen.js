@@ -27,7 +27,7 @@ const ProfileScreen = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (Object.keys(userInfo || {}).length === 0) {
+    if (!userInfo) {
       navigate("/login");
     } else {
       if (!user || !user.name || success) {
@@ -54,7 +54,6 @@ const ProfileScreen = () => {
       <Col md={3}>
         <h2>User Profile</h2>
         {message && <Message variant="danger">{message}</Message>}
-        {}
         {success && <Message variant="success">Profile Updated</Message>}
         {loading ? (
           <Spinner />

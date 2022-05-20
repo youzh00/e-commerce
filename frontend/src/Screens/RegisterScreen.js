@@ -26,7 +26,7 @@ const RegisterScreen = () => {
     : "/";
 
   useEffect(() => {
-    if (Object.keys(userInfo || {}).length !== 0) {
+    if (userInfo) {
       navigate(redirect);
     }
   }, [userInfo, redirect, navigate]);
@@ -56,6 +56,7 @@ const RegisterScreen = () => {
             placeholder="Enter name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            required
           ></Form.Control>
         </Form.Group>
         <Form.Group controlId="email">
@@ -65,12 +66,14 @@ const RegisterScreen = () => {
             placeholder="Enter email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           ></Form.Control>
         </Form.Group>
 
         <Form.Group controlId="password">
           <Form.Label>Password</Form.Label>
           <Form.Control
+            required
             type="password"
             placeholder="Enter password"
             value={password}
@@ -81,6 +84,7 @@ const RegisterScreen = () => {
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control
             type="password"
+            required
             placeholder="Confirm password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
