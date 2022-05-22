@@ -6,25 +6,33 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import { set } from "mongoose";
+import { saveShippingAddress } from "../actions/cartActions";
+import CheckOutSteps from "../components/CheckOutSteps.jsx";
 
 //!-------------Component Part-------------//
-console.log("shipping Screen");
-
 const ShippingScreen = () => {
+  const cart = useSelector((state) => state.cart);
+  const { shippingAddress } = cart;
+
   const navigate = useNavigate();
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [postalCode, setPostalCode] = useState("");
-  const [country, setCountry] = useState("");
+  const [address, setAddress] = useState(shippingAddress.address);
+  const [city, setCity] = useState(shippingAddress.city);
+  const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
+  const [country, setCountry] = useState(shippingAddress.country);
+
+  const dispatch = useDispatch();
 
   const submitHandler = (e) => {
     e.preventDefault();
     console.log("shipping page submit");
+    dispatch(saveShippingAddress({ address, city, postalCode, country }));
+    navigate("/payment");
   };
 
   return (
     <>
       <FormContainer>
+        <CheckOutSteps step1 step2 step3 />
         <h1>Shipping</h1>
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="address">
