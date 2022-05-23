@@ -12,6 +12,7 @@ const connectDB = require("./config/db");
 const colors = require("colors");
 const productsRouter = require("./routes/productsRoutes");
 const userRouter = require("./routes/userRoutes");
+const orderRouter = require("./routes/orderRoutes");
 const { notFound, errorHandler } = require("./middleware/errorMidlleware");
 
 //!-------------Code part------------------//
@@ -23,6 +24,7 @@ app.use("/products", productsRouter);
 app.use("/users", userRouter);
 app.use(notFound);
 app.use(errorHandler);
+app.use("/orders", orderRouter);
 
 const start = async () => {
   try {
