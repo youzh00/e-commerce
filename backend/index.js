@@ -22,9 +22,9 @@ app.use(cors());
 
 app.use("/products", productsRouter);
 app.use("/users", userRouter);
+app.use("/orders", orderRouter);
 app.use(notFound);
 app.use(errorHandler);
-app.use("/orders", orderRouter);
 
 const start = async () => {
   try {

@@ -47,6 +47,7 @@ export const PlaceOrderScreen = () => {
   const { order, success, error } = orderCreate;
   const placeOrderHandler = () => {
     dispatch(createdOrder(orderedItems));
+    console.log("placeOrderHandler");
   };
   useEffect(() => {
     if (success) {

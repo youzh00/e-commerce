@@ -12,7 +12,7 @@ const addOrderitems = async (req, res) => {
     taxPrice,
     shippingPrice,
     totalPrice,
-  } = res.body;
+  } = req.body;
   if (orderItems && orderItems.length === 0) {
     res.status(400);
     throw new Error("No order items");
@@ -36,9 +36,10 @@ const addOrderitems = async (req, res) => {
 // get /orders/:id
 //Private
 const getOrderById = async (req, res) => {
-  const order = await order
-    .findById(req.params.id)
-    .populate("user", "name email");
+  const order = await Order.findById(req.params.id).populate(
+    "user",
+    "name email"
+  );
   if (order) {
     res.json(order);
   } else {

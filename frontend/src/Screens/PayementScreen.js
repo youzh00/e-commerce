@@ -23,9 +23,8 @@ const PayementScreen = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("shipping page submit");
     dispatch(savePayementMethod(payementMethod));
-    navigate("/placeholder");
+    navigate("/placeorder");
   };
 
   return (
