@@ -8,6 +8,7 @@ require("dotenv").config();
 const app = express();
 const cors = require("cors");
 const port = process.env.PORT || 5000;
+const paypalClientID = process.env.PAYPAL_CLIENT_ID;
 const connectDB = require("./config/db");
 const colors = require("colors");
 const productsRouter = require("./routes/productsRoutes");
@@ -20,6 +21,7 @@ const { notFound, errorHandler } = require("./middleware/errorMidlleware");
 app.use(express.json());
 app.use(cors());
 
+app.get("/config/paypal", (req, res) => res.send({ paypalClientID }));
 app.use("/products", productsRouter);
 app.use("/users", userRouter);
 app.use("/orders", orderRouter);

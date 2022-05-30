@@ -15,14 +15,19 @@ import Message from "../components/Message";
 import { saveShippingAddress } from "../actions/cartActions";
 import Spinner from "../components/Spinner.jsx";
 import { getOrderDetails } from "../actions/orderActions";
+import axios from "axios";
 //!-------------Component Part-------------//
 export const OrderScreen = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [sdkReady, setSdkReady] = useState(false);
 
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
+
+  const orderPay = useSelector((state) => state.orderPay);
+  const { success: successPay, loading: loadingPay } = orderPay;
 
   if (!loading) {
     order.itemsPrice = order.orderItems.reduce(
@@ -31,8 +36,23 @@ export const OrderScreen = () => {
     );
   }
   useEffect(() => {
-    dispatch(getOrderDetails(id));
-  }, [dispatch]);
+    const addPaypalScript = async () => {
+      const { data: clientId } = await axios.get("../config/paypal");
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
+      script.async = true;
+      script.onload = () => {
+        setSdkReady(true);
+      };
+      document.body.appendChild(script);
+      console.log(clientId);
+    };
+    if (!order || successPay) {
+      dispatch(getOrderDetails(id));
+    }
+    // addPaypalScript();
+  }, [dispatch, id, successPay, order]);
   return loading ? (
     <Spinner />
   ) : error ? (
