@@ -9,6 +9,9 @@ import {
   ORDER_PAY_SUCCESS,
   ORDER_PAY_FAIL,
   ORDER_PAY_RESET,
+  USER_ORDERS_LIST_REQUEST,
+  USER_ORDERS_LIST_SUCCESS,
+  USER_ORDERS_LIST_FAIL,
 } from "../constants/orderConstants";
 import axios from "axios";
 
@@ -125,3 +128,40 @@ export const payOrder =
       });
     }
   };
+
+export const getUserOrdersList = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: USER_ORDERS_LIST_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(
+      `http://localhost:5000/orders/myorders`,
+      config
+    );
+
+    dispatch({
+      type: USER_ORDERS_LIST_SUCCESS,
+
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: USER_ORDERS_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
