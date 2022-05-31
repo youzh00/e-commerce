@@ -69,4 +69,17 @@ const updateOrderToPaid = async (req, res) => {
     throw new Error("Order not found");
   }
 };
-module.exports = { addOrderitems, getOrderById, updateOrderToPaid };
+
+// get user orders
+// get /orders/myorders
+//Private
+const getUserOrders = async (req, res) => {
+  const orders = await Order.findBy({ user: req.user._id });
+  res.json(orders);
+};
+module.exports = {
+  addOrderitems,
+  getOrderById,
+  updateOrderToPaid,
+  getUserOrders,
+};
