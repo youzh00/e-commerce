@@ -14,8 +14,10 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import { saveShippingAddress } from "../actions/cartActions";
 import Spinner from "../components/Spinner.jsx";
-import { getOrderDetails } from "../actions/orderActions";
+import { getOrderDetails, payOrder } from "../actions/orderActions";
 import axios from "axios";
+import { PayPalButton } from "react-paypal-button-v2";
+import { ORDER_PAY_RESET } from "../constants/orderConstants";
 //!-------------Component Part-------------//
 export const OrderScreen = () => {
   const { id } = useParams();
@@ -46,13 +48,24 @@ export const OrderScreen = () => {
         setSdkReady(true);
       };
       document.body.appendChild(script);
-      console.log(clientId);
     };
     if (!order || successPay) {
+      dispatch({ type: ORDER_PAY_RESET });
       dispatch(getOrderDetails(id));
     }
-    // addPaypalScript();
+    // if the order not paid
+    else if (!order.isPaid) {
+      // if paypal script not there
+      if (!window.paypal) {
+        addPaypalScript();
+      } else {
+        setSdkReady(true);
+      }
+    }
   }, [dispatch, id, successPay, order]);
+  const successPaymentHandler = (paymentResult) => {
+    dispatch(payOrder(id, paymentResult));
+  };
   return loading ? (
     <Spinner />
   ) : error ? (
@@ -165,6 +178,19 @@ export const OrderScreen = () => {
                   <Col>${order.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
+              {!order.isPaid && (
+                <ListGroup.Item>
+                  {loadingPay && <Spinner />}
+                  {!sdkReady ? (
+                    <Spinner />
+                  ) : (
+                    <PayPalButton
+                      amount={order.totalPrice}
+                      onSuccess={successPaymentHandler}
+                    />
+                  )}
+                </ListGroup.Item>
+              )}
             </ListGroup>
           </Card>
         </Col>

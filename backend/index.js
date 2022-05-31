@@ -21,7 +21,7 @@ const { notFound, errorHandler } = require("./middleware/errorMidlleware");
 app.use(express.json());
 app.use(cors());
 
-app.get("/config/paypal", (req, res) => res.send({ paypalClientID }));
+app.get("/config/paypal", (req, res) => res.send(paypalClientID));
 app.use("/products", productsRouter);
 app.use("/users", userRouter);
 app.use("/orders", orderRouter);
