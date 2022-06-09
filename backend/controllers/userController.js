@@ -87,4 +87,16 @@ const updateUserProfile = async (req, res) => {
   }
 };
 
-module.exports = { authUser, registerUser, getUserProfile, updateUserProfile };
+// /users
+const getAllUsers = async (req, res) => {
+  const users = await User.find({});
+  res.json(users);
+};
+
+module.exports = {
+  authUser,
+  registerUser,
+  getAllUsers,
+  getUserProfile,
+  updateUserProfile,
+};
