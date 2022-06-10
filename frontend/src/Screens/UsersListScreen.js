@@ -1,11 +1,11 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import { Table, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Spinner from "../components/Spinner";
-import { usersList } from "../actions/userActions";
+import { usersList, deleteUser } from "../actions/userActions";
 const UsersListScreen = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -15,19 +15,22 @@ const UsersListScreen = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
-  const deleteHandler = (id) => {
-    console.log("delete user");
-  };
+  const userDelete = useSelector((state) => state.userDelete);
+  const { success: successDelete } = userDelete;
 
   useEffect(() => {
+    console.log("useeffects re-render");
     if (userInfo && userInfo.isAdmin) {
       dispatch(usersList);
     } else {
       navigate("/login");
     }
     dispatch(usersList());
-  }, [dispatch, userInfo, navigate]);
+  }, [dispatch, userInfo, navigate, successDelete]);
 
+  const deleteHandler = (id) => {
+    dispatch(deleteUser(id));
+  };
   return (
     <>
       <h1>Users</h1>
