@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import { Table, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,16 +8,25 @@ import Spinner from "../components/Spinner";
 import { usersList } from "../actions/userActions";
 const UsersListScreen = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const userslist = useSelector((state) => state.usersList);
   const { loading, error, users } = userslist;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   const deleteHandler = (id) => {
     console.log("delete user");
   };
 
   useEffect(() => {
+    if (userInfo && userInfo.isAdmin) {
+      dispatch(usersList);
+    } else {
+      navigate("/login");
+    }
     dispatch(usersList());
-  }, [dispatch]);
+  }, [dispatch, userInfo, navigate]);
 
   return (
     <>

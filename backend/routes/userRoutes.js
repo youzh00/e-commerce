@@ -8,6 +8,7 @@ const {
   registerUser,
   updateUserProfile,
   getAllUsers,
+  deleteUser,
 } = require("../controllers/userController");
 const { protect, isAdmin } = require("../middleware/authMiddleware");
 
@@ -17,6 +18,6 @@ router
   .route("/profile")
   .get(protect, getUserProfile)
   .put(protect, updateUserProfile);
-// router.route("/users").get(protect, getAllUsers);
+router.route("/:id").delete(protect, isAdmin, deleteUser);
 
 module.exports = router;

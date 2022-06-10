@@ -87,10 +87,25 @@ const updateUserProfile = async (req, res) => {
   }
 };
 
-// /users
+// access {{url}}/admin/users
+// getting all users for admin account
 const getAllUsers = async (req, res) => {
   const users = await User.find({});
   res.json(users);
+};
+
+// access {{url}}/admin/users/:id
+// delete user account
+
+const deleteUser = async (req, res) => {
+  const user = await User.findById(req.params.id);
+  if (user) {
+    await user.delete();
+    res.json({ message: "User deleted successfully" });
+  } else {
+    res.status(404);
+    throw Error("User not found");
+  }
 };
 
 module.exports = {
@@ -99,4 +114,5 @@ module.exports = {
   getAllUsers,
   getUserProfile,
   updateUserProfile,
+  deleteUser,
 };
