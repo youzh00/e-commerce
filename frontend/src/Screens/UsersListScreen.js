@@ -29,7 +29,9 @@ const UsersListScreen = () => {
   }, [dispatch, userInfo, navigate, successDelete]);
 
   const deleteHandler = (id) => {
-    dispatch(deleteUser(id));
+    if (window.confirm("Are you sure")) {
+      dispatch(deleteUser(id));
+    }
   };
   return (
     <>

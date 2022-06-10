@@ -108,6 +108,41 @@ const deleteUser = async (req, res) => {
   }
 };
 
+// getting user by id to edit their account by an admin
+
+const getUserById = async (req, res) => {
+  const user = await User.findById(req.params.id).select("-password");
+  if (user) {
+    res.json(user);
+  } else {
+    res.status(404);
+    throw Error("User not found");
+  }
+};
+
+// update user account by admin
+const updateUser = async (req, res) => {
+  const user = await User.findById(req.params._id);
+
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    user.isAdmin = req.body.isAdmin;
+
+    const updateUser = await user.save();
+
+    res.json({
+      _id: updateUser._id,
+      name: updateUser.name,
+      email: updateUser.email,
+      isAdmin: updateUser.isAdmin,
+    });
+  } else {
+    res.status(404);
+    throw Error("User not found");
+  }
+};
+
 module.exports = {
   authUser,
   registerUser,
@@ -115,4 +150,6 @@ module.exports = {
   getUserProfile,
   updateUserProfile,
   deleteUser,
+  updateUser,
+  getUserById,
 };
