@@ -5,7 +5,12 @@ import { Table, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Spinner from "../components/Spinner";
-import { productsList, deleteProduct } from "../actions/productActions";
+import {
+  productsList,
+  deleteProduct,
+  createProduct,
+} from "../actions/productActions";
+import { PRODUCT_CREATE_RESET } from "../constants/productConstants";
 
 //!-------------Component-------------//
 
@@ -26,14 +31,33 @@ const ProductsListScreen = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const productCreate = useSelector((state) => state.productCreate);
+  const {
+    loading: loadingCreate,
+    error: errorCreate,
+    success: successCreate,
+    product: createdProduct,
+  } = productCreate;
+
   useEffect(() => {
-    if (userInfo && userInfo.isAdmin) {
-      console.log("i am an admin in useEffect");
-      dispatch(productsList());
-    } else {
+    dispatch({ type: PRODUCT_CREATE_RESET });
+    if (!userInfo.isAdmin) {
       navigate("/login");
     }
-  }, [dispatch, userInfo, navigate, successDelete]);
+
+    if (successCreate) {
+      navigate(`/admin/product/${createdProduct._id}/edit`);
+    } else {
+      dispatch(productsList());
+    }
+  }, [
+    dispatch,
+    userInfo,
+    navigate,
+    successDelete,
+    successCreate,
+    createdProduct,
+  ]);
 
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure")) {
@@ -41,8 +65,9 @@ const ProductsListScreen = () => {
       dispatch(deleteProduct(id));
     }
   };
-  const createProductHandler = (product) => {
+  const createProductHandler = () => {
     // Create product section
+    dispatch(createProduct());
   };
   return (
     <>
@@ -58,6 +83,8 @@ const ProductsListScreen = () => {
       </Row>
       {loadingDelete && <Spinner />}
       {errorDelete && <Message variant="danger">{errorDelete}</Message>}
+      {loadingCreate && <Spinner />}
+      {errorCreate && <Message variant="danger">{errorCreate}</Message>}
       {loading ? (
         <Spinner />
       ) : error ? (
