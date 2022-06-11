@@ -229,10 +229,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.delete(
-      `http://localhost:5000/users/${id}`,
-      config
-    );
+    await axios.delete(`http://localhost:5000/users/${id}`, config);
 
     dispatch({ type: USER_DELETE_SUCCESS });
   } catch (error) {
