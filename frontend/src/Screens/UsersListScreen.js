@@ -19,7 +19,6 @@ const UsersListScreen = () => {
   const { success: successDelete } = userDelete;
 
   useEffect(() => {
-    console.log("useeffects re-render");
     if (userInfo && userInfo.isAdmin) {
       dispatch(usersList);
     } else {

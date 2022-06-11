@@ -122,8 +122,7 @@ const getUserById = async (req, res) => {
 
 // update user account by admin
 const updateUser = async (req, res) => {
-  const user = await User.findById(req.params._id);
-
+  const user = await User.findById(req.params.id);
   if (user) {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
