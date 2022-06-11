@@ -1,6 +1,7 @@
 const print = (args) => console.log(args);
 
 //!--------------Requirement---------------//
+const path = require("path");
 require("express-async-errors");
 const express = require("express");
 const products = require("./data/products");
@@ -14,6 +15,7 @@ const colors = require("colors");
 const productsRouter = require("./routes/productsRoutes");
 const userRouter = require("./routes/userRoutes");
 const orderRouter = require("./routes/orderRoutes");
+const uploadRouter = require("./routes/uploadRoutes");
 const { notFound, errorHandler } = require("./middleware/errorMidlleware");
 
 //!-------------Code part------------------//
@@ -25,8 +27,12 @@ app.get("/config/paypal", (req, res) => res.send(paypalClientID));
 app.use("/products", productsRouter);
 app.use("/users", userRouter);
 app.use("/orders", orderRouter);
+app.use("/upload", uploadRouter);
 app.use(notFound);
 app.use(errorHandler);
+
+const __dirname = path.resolve();
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 const start = async () => {
   try {
