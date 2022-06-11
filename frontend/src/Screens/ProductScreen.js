@@ -34,9 +34,9 @@ export const ProductScreen = () => {
   };
   return (
     <>
-      <a className="btn btn-dark my-3 rounded" href="/">
+      <Link className="btn btn-dark my-3 rounded" to="/">
         Go Back
-      </a>
+      </Link>
       {loading ? (
         <Spinner />
       ) : error ? (
