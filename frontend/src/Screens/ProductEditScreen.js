@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Spinner from "../components/Spinner";
 import FormContainer from "../components/FormContainer";
-import { productDetails } from "../actions/productActions";
+import { productDetails, updateProduct } from "../actions/productActions";
+import { PRODUCT_UPDATE_RESET } from "../constants/productConstants";
 
 //!-------------Component Part-------------/
 
@@ -24,23 +25,48 @@ const ProductEditScreen = () => {
 
   const productdetails = useSelector((state) => state.product);
   const { loading, error, product } = productdetails;
+
+  const productupdate = useSelector((state) => state.productUpdate);
+  const {
+    loading: loadingUpdate,
+    error: errorUpdate,
+    success: successUpdated,
+  } = productupdate;
+
   useEffect(() => {
-    if (!product.name || product._id !== productId) {
-      dispatch(productDetails(productId));
+    if (successUpdated) {
+      dispatch({ type: PRODUCT_UPDATE_RESET });
+      navigate(`/admin/productslist`);
     } else {
-      setName(product.name);
-      setPrice(product.price);
-      setBrand(product.brand);
-      setImage(product.image);
-      setCountInStock(product.countInStock);
-      setCategory(product.category);
-      setDescription(product.description);
+      if (!product.name || product._id !== productId) {
+        dispatch(productDetails(productId));
+      } else {
+        setName(product.name);
+        setPrice(product.price);
+        setBrand(product.brand);
+        setImage(product.image);
+        setCountInStock(product.countInStock);
+        setCategory(product.category);
+        setDescription(product.description);
+      }
     }
-  }, [product, productId, dispatch, navigate]);
+  }, [product, productId, dispatch, navigate, successUpdated]);
 
   const submitHandler = (e) => {
     e.preventDefault();
     //update product section
+    dispatch(
+      updateProduct({
+        _id: productId,
+        name,
+        price,
+        image,
+        brand,
+        category,
+        description,
+        countInStock,
+      })
+    );
   };
 
   if (loading) {
@@ -53,8 +79,8 @@ const ProductEditScreen = () => {
       </Link>
       <FormContainer>
         <h1>Edit Product</h1>
-        {/* {loadingUpdate && <Spinner />}
-        {errorUpdate && <Message variant="danger">{errorUpdate}</Message>} */}
+        {loadingUpdate && <Spinner />}
+        {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
         {loading ? (
           <Spinner />
         ) : error ? (
