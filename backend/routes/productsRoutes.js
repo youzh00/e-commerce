@@ -9,14 +9,20 @@ const {
   getAllProducts,
   getProduct,
   deleteProduct,
+  updateProduct,
+  createProduct,
 } = require("../controllers/productsController");
 const { protect, isAdmin } = require("../middleware/authMiddleware");
 
 //!-------------Code part------------------//
 //get products from the database
-router.route("/").get(getAllProducts);
+router.route("/").get(getAllProducts).post(protect, isAdmin, createProduct);
 
 //get only one product from the database
-router.route("/:id").get(getProduct).delete(protect, isAdmin, deleteProduct);
+router
+  .route("/:id")
+  .get(getProduct)
+  .delete(protect, isAdmin, deleteProduct)
+  .put(protect, isAdmin, updateProduct);
 
 module.exports = router;
