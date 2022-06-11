@@ -31,7 +31,6 @@ app.use("/upload", uploadRouter);
 app.use(notFound);
 app.use(errorHandler);
 
-const __dirname = path.resolve();
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 const start = async () => {

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,6 +21,7 @@ const ProductEditScreen = () => {
   const [countInStock, setCountInStock] = useState(0);
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
+  const [uploading, setUploading] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -69,14 +71,34 @@ const ProductEditScreen = () => {
     );
   };
 
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("image", file);
+    console.log(formData);
+    setUploading(true);
+    try {
+      const config = {
+        headers: { "Content-Type": "multipart/form-data" },
+      };
+      const { data } = await axios.post("/upload", formData, config);
+      setImage(data);
+      console.log(data);
+      setUploading(false);
+    } catch (e) {
+      console.error(e);
+      setUploading(false);
+    }
+  };
+
   if (loading) {
     return <Spinner />;
   }
   return (
     <>
-      <Link to="/admin/productslist" className="btn btn-light my-3">
+      <a href="/admin/productslist" className="btn btn-light my-3">
         Go Back
-      </Link>
+      </a>
       <FormContainer>
         <h1>Edit Product</h1>
         {loadingUpdate && <Spinner />}
@@ -111,12 +133,21 @@ const ProductEditScreen = () => {
             <Form.Group controlId="image" className="my-3">
               <Form.Label>Image</Form.Label>
               <Form.Control
-                type="image"
+                type="text"
                 placeholder="Enter Image URL"
                 value={image}
                 onChange={(e) => setImage(e.target.value)}
                 required
               ></Form.Control>
+              <Form.Group>
+                <Form.Control
+                  type="file"
+                  id="image-file"
+                  label="Choose file"
+                  onChange={uploadFileHandler}
+                />
+              </Form.Group>
+              {uploading && <Spinner />}
             </Form.Group>
 
             <Form.Group controlId="brand" className="my-3">

@@ -35,7 +35,9 @@ const upload = multer({
 });
 
 router.post("/", upload.single("image"), (req, res) => {
-  res.send(`/$`);
+  const filename = req.file.filename;
+  // const filepath = path.join(req.file.path.split('\\'))
+  res.send(`/uploads/${filename}`);
 });
 
-export default router;
+module.exports = router;
