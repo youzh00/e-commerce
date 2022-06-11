@@ -1,7 +1,7 @@
 //!-------------Requirements-------------//
 
 import React, { useEffect } from "react";
-import { Row, Col, Container } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import Product from "../components/Product";
 import Message from "../components/Message";
 import { useDispatch, useSelector } from "react-redux";

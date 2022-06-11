@@ -28,10 +28,10 @@ app.use("/products", productsRouter);
 app.use("/users", userRouter);
 app.use("/orders", orderRouter);
 app.use("/upload", uploadRouter);
+app.use("/uploads", express.static(path.join(__dirname, "..", "/uploads")));
+
 app.use(notFound);
 app.use(errorHandler);
-
-app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 const start = async () => {
   try {
