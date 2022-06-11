@@ -5,13 +5,24 @@ import { Table, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Spinner from "../components/Spinner";
-import { productsList } from "../actions/productActions";
+import { productsList, deleteProduct } from "../actions/productActions";
+
+//!-------------Component-------------//
+
 const ProductsListScreen = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const productslist = useSelector((state) => state.products);
   const { loading, error, products } = productslist;
-  console.log(productslist);
+
+  const productDelete = useSelector((state) => state.productDelete);
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = productDelete;
+
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
@@ -22,11 +33,12 @@ const ProductsListScreen = () => {
     } else {
       navigate("/login");
     }
-  }, [dispatch, userInfo, navigate]);
+  }, [dispatch, userInfo, navigate, successDelete]);
 
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure")) {
       //   Delete product section
+      dispatch(deleteProduct(id));
     }
   };
   const createProductHandler = (product) => {
@@ -44,7 +56,8 @@ const ProductsListScreen = () => {
           </Button>
         </Col>
       </Row>
-
+      {loadingDelete && <Spinner />}
+      {errorDelete && <Message variant="danger">{errorDelete}</Message>}
       {loading ? (
         <Spinner />
       ) : error ? (
