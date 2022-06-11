@@ -15,7 +15,20 @@ const getProduct = async (req, res) => {
   }
 };
 
+// delete product by an admin
+const deleteProduct = async (req, res) => {
+  const product = await Product.findById(req.params.id);
+  if (product) {
+    await product.delete();
+    res.json({ message: "Product deleted successfully" });
+  } else {
+    res.status(404);
+    throw Error("User not found");
+  }
+};
+
 module.exports = {
   getAllProducts,
   getProduct,
+  deleteProduct,
 };

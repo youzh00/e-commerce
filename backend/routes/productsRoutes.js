@@ -8,12 +8,15 @@ const router = express.Router();
 const {
   getAllProducts,
   getProduct,
+  deleteProduct,
 } = require("../controllers/productsController");
+const { protect, isAdmin } = require("../middleware/authMiddleware");
+
 //!-------------Code part------------------//
 //get products from the database
 router.route("/").get(getAllProducts);
 
 //get only one product from the database
-router.route("/:id").get(getProduct);
+router.route("/:id").get(getProduct).delete(protect, isAdmin, deleteProduct);
 
 module.exports = router;

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 import style from "../Styles/Header.module.css";
 import { LinkContainer } from "react-router-bootstrap";
-import { Link } from "react-router-dom";
 import { logout } from "../actions/userActions";
 
 const Header = () => {
