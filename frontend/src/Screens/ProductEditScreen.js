@@ -96,9 +96,9 @@ const ProductEditScreen = () => {
   }
   return (
     <>
-      <a href="/admin/productslist" className="btn btn-light my-3">
+      <Link to="/admin/productslist" className="btn btn-light my-3">
         Go Back
-      </a>
+      </Link>
       <FormContainer>
         <h1>Edit Product</h1>
         {loadingUpdate && <Spinner />}
