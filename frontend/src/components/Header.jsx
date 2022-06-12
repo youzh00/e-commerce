@@ -4,6 +4,7 @@ import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 import style from "../Styles/Header.module.css";
 import { LinkContainer } from "react-router-bootstrap";
 import { logout } from "../actions/userActions";
+import { Search } from "./Search";
 
 const Header = () => {
   const userLogin = useSelector((state) => state.userLogin);
@@ -32,6 +33,7 @@ const Header = () => {
             id="basic-navbar-nav"
             className="justify-content-end"
           >
+            <Search/>
             <Nav className="ml-auto">
               <LinkContainer to="/cart">
                 <Nav.Link className={style.cart}>

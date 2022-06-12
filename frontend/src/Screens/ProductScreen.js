@@ -42,7 +42,7 @@ export const ProductScreen = () => {
       dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
     }
     dispatch(productDetails(id));
-  }, [id, dispatch]);
+  }, [id, dispatch, successReview]);
 
   const addToCartHandler = () => {
     navigate(`/cart/${id}?qty=${qty}`);

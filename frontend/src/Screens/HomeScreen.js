@@ -1,20 +1,23 @@
 //!-------------Requirements-------------//
 
 import React, { useEffect } from "react";
-import { Row, Col, Container } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import Product from "../components/Product";
 import Message from "../components/Message";
 import { useDispatch, useSelector } from "react-redux";
 import { productsList } from "../actions/productActions";
 import Spinner from "../components/Spinner";
+import { useParams } from "react-router-dom";
 
 //!-------------Component Part-------------//
 export const HomeScreen = () => {
   const dispatch = useDispatch();
   const { loading, error, products } = useSelector((state) => state.products);
+  const { keyword } = useParams();
+  console.log(keyword);
   useEffect(() => {
-    dispatch(productsList());
-  }, [dispatch]);
+    dispatch(productsList(keyword));
+  }, [dispatch, keyword]);
 
   if (loading) {
     return (
