@@ -69,10 +69,47 @@ const updateProduct = async (req, res) => {
   }
 };
 
+// Create new review
+// products/:id/review
+const createReview = async (req, res) => {
+  const { rating, comment } = req.body;
+
+  const product = await Product.findById(req.params.id);
+
+  if (product) {
+    const alreadyReviewed = product.reviews.find(
+      (r) => r.user.toString() === req.user._id.toString()
+    );
+    if (alreadyReviewed) {
+      res.status(400);
+      throw new Error("Product already reviewed");
+    }
+    const review = {
+      name: req.user.name,
+      rating: Number(rating),
+      comment,
+      user: req.user._id,
+    };
+    product.reviews.push(review);
+    product.numReviews = product.reviews.length;
+
+    product.rating =
+      product.reviews.reduce((sum, review) => review.rating + sum, 0) /
+      product.reviews.length;
+
+    await product.save();
+    res.status(200).json({ message: "Review saved successfully" });
+  } else {
+    res.status(404);
+    throw Error("User not found");
+  }
+};
+
 module.exports = {
   getAllProducts,
   getProduct,
   deleteProduct,
   updateProduct,
   createProduct,
+  createReview,
 };

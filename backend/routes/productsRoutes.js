@@ -11,6 +11,7 @@ const {
   deleteProduct,
   updateProduct,
   createProduct,
+  createReview,
 } = require("../controllers/productsController");
 const { protect, isAdmin } = require("../middleware/authMiddleware");
 
@@ -19,6 +20,7 @@ const { protect, isAdmin } = require("../middleware/authMiddleware");
 router.route("/").get(getAllProducts).post(protect, isAdmin, createProduct);
 
 //get only one product from the database
+router.route("/:id/reviews").post(protect, createReview);
 router
   .route("/:id")
   .get(getProduct)

@@ -8,6 +8,7 @@ const products = require("./data/products");
 require("dotenv").config();
 const app = express();
 const cors = require("cors");
+const morgan = require("morgan");
 const port = process.env.PORT || 5000;
 const paypalClientID = process.env.PAYPAL_CLIENT_ID;
 const connectDB = require("./config/db");
@@ -19,6 +20,8 @@ const uploadRouter = require("./routes/uploadRoutes");
 const { notFound, errorHandler } = require("./middleware/errorMidlleware");
 
 //!-------------Code part------------------//
+
+app.use(morgan("dev"));
 
 app.use(express.json());
 app.use(cors());
