@@ -85,10 +85,29 @@ const getAllOrders = async (req, res) => {
   res.json(orders);
 };
 
+// update order to delivered
+// get /orders/:id/delivered
+//Private admin only
+const updateOrderToDelivered = async (req, res) => {
+  const order = await Order.findById(req.params.id);
+  console.log(order);
+  if (order) {
+    order.isDelivered = true;
+    order.deliveredAt = Date.now();
+
+    const updatedOrder = await order.save();
+    res.json(updatedOrder);
+  } else {
+    res.status(404);
+    throw new Error("Order not found");
+  }
+};
+
 module.exports = {
   addOrderitems,
   getOrderById,
   updateOrderToPaid,
   getUserOrders,
   getAllOrders,
+  updateOrderToDelivered,
 };
