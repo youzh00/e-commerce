@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import { Search } from "./components/Search";
 import { Container } from "react-bootstrap";
 import "./index.css";
 import { HomeScreen } from "./Screens/HomeScreen";
@@ -30,6 +29,12 @@ function App() {
             <Routes>
               <Route exact path="/" element={<HomeScreen />} />
               <Route exact path="/search/:keyword" element={<HomeScreen />} />
+              <Route exact path="/page/:pageNumber" element={<HomeScreen />} />
+              <Route
+                exact
+                path="/search/:keyword/page/:pageNumber"
+                element={<HomeScreen />}
+              />
               <Route path="/product/:id" element={<ProductScreen />} />
               <Route path="/cart/:id" element={<CartScreen />} />
               <Route path="/cart/" element={<CartScreen />} />
@@ -43,6 +48,10 @@ function App() {
               <Route path="/admin/userslist" element={<UsersListScreen />} />
               <Route
                 path="/admin/productslist"
+                element={<ProductsListScreen />}
+              />
+              <Route
+                path="/admin/productslist/:pageNumber"
                 element={<ProductsListScreen />}
               />
               <Route

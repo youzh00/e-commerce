@@ -1,15 +1,21 @@
 const Product = require("../models/productModel");
 
 const getAllProducts = async (req, res) => {
+  const pageSize = 8;
+  const page = Number(req.query.pageNumber) || 1;
   const keyword = req.query.keyword
     ? {
         name: { $regex: req.query.keyword, $options: "i" },
       }
     : {};
-  console.log(keyword);
-  const products = await Product.find({ ...keyword });
-  // const products = await Product.find({});
-  res.status(200).json(products);
+
+  const count = await Product.count({ ...keyword });
+  console.log(count);
+
+  const products = await Product.find({ ...keyword })
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
+  res.status(200).json({ products, page, pages: Math.ceil(count / pageSize) });
 };
 
 const getProduct = async (req, res) => {

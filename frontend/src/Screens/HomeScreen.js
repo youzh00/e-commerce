@@ -8,16 +8,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { productsList } from "../actions/productActions";
 import Spinner from "../components/Spinner";
 import { useParams } from "react-router-dom";
+import Paging from "../components/Paging";
 
 //!-------------Component Part-------------//
 export const HomeScreen = () => {
   const dispatch = useDispatch();
-  const { loading, error, products } = useSelector((state) => state.products);
-  const { keyword } = useParams();
-  console.log(keyword);
+  const { loading, error, products, pages, page } = useSelector(
+    (state) => state.products
+  );
+  const { keyword, pageNumber = 1 } = useParams();
+
   useEffect(() => {
-    dispatch(productsList(keyword));
-  }, [dispatch, keyword]);
+    dispatch(productsList(keyword, pageNumber));
+  }, [dispatch, keyword, pageNumber]);
 
   if (loading) {
     return (
@@ -39,6 +42,7 @@ export const HomeScreen = () => {
   return (
     <>
       <h1> Latest Products </h1>
+
       <Row>
         {products.map((product) => (
           <Col sm={12} md={6} lg={4} xl={3} key={product._id}>
@@ -46,6 +50,7 @@ export const HomeScreen = () => {
           </Col>
         ))}
       </Row>
+      <Paging pages={pages} page={page} keyword={keyword ? keyword : ""} />
     </>
   );
 };
