@@ -53,6 +53,7 @@ const getOrderById = async (req, res) => {
 //Private
 const updateOrderToPaid = async (req, res) => {
   const order = await Order.findById(req.params.id);
+  console.log(order);
   if (order) {
     order.isPaid = true;
     order.paidAt = Date.now();
@@ -62,7 +63,7 @@ const updateOrderToPaid = async (req, res) => {
       update_time: req.body.update_time,
       email_address: req.body.payer.email_address,
     };
-    const updatedOrder = await Order.save();
+    const updatedOrder = await order.save();
     res.json(updatedOrder);
   } else {
     res.status(404);

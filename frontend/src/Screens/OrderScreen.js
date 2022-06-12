@@ -1,28 +1,19 @@
-//!-------------Requirements-------------//
 import React, { useState, useEffect } from "react";
-import {
-  Form,
-  Button,
-  Row,
-  ListGroup,
-  Image,
-  Card,
-  Col,
-} from "react-bootstrap";
-import { Link, useParams, useNavigate, Navigate } from "react-router-dom";
+import { Row, ListGroup, Image, Card, Col } from "react-bootstrap";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
-import { saveShippingAddress } from "../actions/cartActions";
 import Spinner from "../components/Spinner.jsx";
 import { getOrderDetails, payOrder } from "../actions/orderActions";
 import axios from "axios";
 import { PayPalButton } from "react-paypal-button-v2";
 import { ORDER_PAY_RESET } from "../constants/orderConstants";
+
 //!-------------Component Part-------------//
+
 export const OrderScreen = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [sdkReady, setSdkReady] = useState(false);
 
   const orderDetails = useSelector((state) => state.orderDetails);
@@ -39,7 +30,9 @@ export const OrderScreen = () => {
   }
   useEffect(() => {
     const addPaypalScript = async () => {
-      const { data: clientId } = await axios.get("../config/paypal");
+      const { data: clientId } = await axios.get(
+        "http://localhost:5000/config/paypal"
+      );
       const script = document.createElement("script");
       script.type = "text/javascript";
       script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;

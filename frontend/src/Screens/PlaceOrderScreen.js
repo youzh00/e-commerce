@@ -1,18 +1,9 @@
 //!-------------Requirements-------------//
-import React, { useState, useEffect } from "react";
-import {
-  Form,
-  Button,
-  Row,
-  ListGroup,
-  Image,
-  Card,
-  Col,
-} from "react-bootstrap";
-import { Link, useParams, useNavigate, Navigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Button, Row, ListGroup, Image, Card, Col } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
-import { saveShippingAddress } from "../actions/cartActions";
 import CheckOutSteps from "../components/CheckOutSteps.jsx";
 import { createdOrder } from "../actions/orderActions";
 //!-------------Component Part-------------//
@@ -52,6 +43,7 @@ export const PlaceOrderScreen = () => {
   useEffect(() => {
     if (success) {
       navigate(`/order/${order._id}`);
+      // dispatch({ type: USER_DETAILS_RESET });
     }
     // eslint-disable-next-line
   }, [navigate, success]);

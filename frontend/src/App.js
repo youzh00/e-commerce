@@ -15,6 +15,7 @@ import UsersListScreen from "./Screens/UsersListScreen";
 import UserEditScreen from "./Screens/UserEditScreen";
 import ProductsListScreen from "./Screens/ProductsListScreen";
 import ProductEditScreen from "./Screens/ProductEditScreen";
+import OrdersListScreen from "./Screens/OrdersListScreen";
 import { PlaceOrderScreen } from "./Screens/PlaceOrderScreen";
 import { OrderScreen } from "./Screens/OrderScreen";
 
@@ -50,6 +51,7 @@ function App() {
                 path="/admin/products/:id/edit"
                 element={<ProductEditScreen />}
               />
+              <Route path="/admin/orderslist" element={<OrdersListScreen />} />
             </Routes>
           </Container>
         </main>

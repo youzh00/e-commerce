@@ -16,7 +16,6 @@ import {
   ORDERS_LIST_REQUEST,
   ORDERS_LIST_SUCCESS,
   ORDERS_LIST_FAIL,
-  ORDERS_LIST_RESET,
 } from "../constants/orderConstants";
 
 export const orderCreateReducer = (state = {}, action) => {
@@ -27,6 +26,7 @@ export const orderCreateReducer = (state = {}, action) => {
       return { loading: false, success: true, order: action.payload };
     case ORDER_CREATE_FAIL:
       return { loading: false, error: action.payload };
+
     default:
       return state;
   }
