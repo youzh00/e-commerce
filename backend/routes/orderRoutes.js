@@ -15,9 +15,9 @@ router
   .route("/")
   .post(protect, addOrderitems)
   .get(protect, isAdmin, getAllOrders);
+router.route("/myorders").get(protect, getUserOrders);
 router.route("/:id").get(protect, getOrderById);
 router.route("/:id/pay").put(protect, updateOrderToPaid);
 router.route("/:id/delivered").put(protect, isAdmin, updateOrderToDelivered);
-router.route("/myorders").get(protect, getUserOrders);
 
 module.exports = router;

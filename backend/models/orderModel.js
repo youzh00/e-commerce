@@ -6,9 +6,9 @@ const mongoose = require("mongoose");
 const orderSchema = mongoose.Schema(
   {
     user: {
-      ref: "User",
-      required: true,
       type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
     },
     orderItems: [
       {

@@ -28,6 +28,7 @@ const ProfileScreen = () => {
 
   const userOrdersList = useSelector((state) => state.userOrdersList);
   const { loading: loadingOrders, error: errorOrders, orders } = userOrdersList;
+  console.log(orders);
 
   const navigate = useNavigate();
 
@@ -37,7 +38,7 @@ const ProfileScreen = () => {
     } else {
       if (!user || !user.name || success) {
         dispatch(getUserDetails("profile"));
-        dispatch(getUserOrdersList);
+        dispatch(getUserOrdersList());
       } else {
         setName(user.name);
         setEmail(user.email);
