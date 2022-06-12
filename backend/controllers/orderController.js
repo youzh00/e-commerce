@@ -77,9 +77,17 @@ const getUserOrders = async (req, res) => {
   const orders = await Order.findBy({ user: req.user._id });
   res.json(orders);
 };
+
+// getiing all orders by an admin user
+const getAllOrders = async (req, res) => {
+  const orders = await Order.find({}).populate("user", "id name");
+  res.json(orders);
+};
+
 module.exports = {
   addOrderitems,
   getOrderById,
   updateOrderToPaid,
   getUserOrders,
+  getAllOrders,
 };
