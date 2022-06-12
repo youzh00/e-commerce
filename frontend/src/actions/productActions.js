@@ -170,7 +170,7 @@ export const createProductReview =
       };
 
       await axios.post(
-        `http://localhost:5000/products/${productId}`,
+        `http://localhost:5000/products/${productId}/reviews`,
         review,
         config
       );
