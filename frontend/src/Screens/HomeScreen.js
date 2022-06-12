@@ -9,6 +9,7 @@ import { productsList } from "../actions/productActions";
 import Spinner from "../components/Spinner";
 import { useParams } from "react-router-dom";
 import Paging from "../components/Paging";
+import { ProductCarousel } from "../components/ProductCarousel";
 
 //!-------------Component Part-------------//
 export const HomeScreen = () => {
@@ -41,6 +42,7 @@ export const HomeScreen = () => {
 
   return (
     <>
+      {!keyword && <ProductCarousel />}
       <h1> Latest Products </h1>
 
       <Row>
