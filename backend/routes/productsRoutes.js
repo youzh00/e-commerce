@@ -12,6 +12,7 @@ const {
   updateProduct,
   createProduct,
   createReview,
+  getTopProducts,
 } = require("../controllers/productsController");
 const { protect, isAdmin } = require("../middleware/authMiddleware");
 
@@ -21,6 +22,7 @@ router.route("/").get(getAllProducts).post(protect, isAdmin, createProduct);
 
 //get only one product from the database
 router.route("/:id/reviews").post(protect, createReview);
+router.get("/top", getTopProducts);
 router
   .route("/:id")
   .get(getProduct)

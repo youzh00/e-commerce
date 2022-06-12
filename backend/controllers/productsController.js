@@ -118,6 +118,14 @@ const createReview = async (req, res) => {
   }
 };
 
+// getting top rated products
+// /products/top
+const getTopProducts = async (req, res) => {
+  const products = await Product.find({}).sort({ rating: -1 }).limit(3);
+
+  res.json(products);
+};
+
 module.exports = {
   getAllProducts,
   getProduct,
@@ -125,4 +133,5 @@ module.exports = {
   updateProduct,
   createProduct,
   createReview,
+  getTopProducts,
 };
