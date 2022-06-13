@@ -39,7 +39,7 @@ const UsersListScreen = () => {
     <>
       <PageTitle title={"Liste des utilisateurs"} />
 
-      <h1>Users</h1>
+      <h1>Utilisateurs</h1>
       {loading ? (
         <Spinner />
       ) : error ? (
@@ -49,9 +49,9 @@ const UsersListScreen = () => {
           <thead>
             <tr>
               <th>ID</th>
-              <th>Name</th>
+              <th>Nom</th>
               <th>Email</th>
-              <th>ADMIN</th>
+              <th>ADMINISTRATEUR</th>
               <th></th>
             </tr>
           </thead>

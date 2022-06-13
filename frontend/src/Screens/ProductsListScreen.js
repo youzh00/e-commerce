@@ -79,11 +79,11 @@ const ProductsListScreen = () => {
 
       <Row className="align-items-center">
         <Col>
-          <h1>Products</h1>
+          <h1>Produits</h1>
         </Col>
         <Col>
           <Button className="my-3" onClick={createProductHandler}>
-            <i className="fas fa-plus"></i> Create Product
+            <i className="fas fa-plus"></i> Créer un produit
           </Button>
         </Col>
       </Row>
@@ -101,10 +101,10 @@ const ProductsListScreen = () => {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Name</th>
-                <th>PRICE</th>
-                <th>CATEGORY</th>
-                <th>BRAND</th>
+                <th>NOM DU PRODUIT</th>
+                <th>PRIX</th>
+                <th>CATÉGORIE</th>
+                <th>MARQUE</th>
                 <th></th>
               </tr>
             </thead>
@@ -113,7 +113,7 @@ const ProductsListScreen = () => {
                 <tr key={product._id}>
                   <td>{product._id}</td>
                   <td>{product.name}</td>
-                  <td>${product.price}</td>
+                  <td>{product.price} Dhs</td>
                   <td>{product.category}</td>
                   <td>{product.brand}</td>
                   <td>

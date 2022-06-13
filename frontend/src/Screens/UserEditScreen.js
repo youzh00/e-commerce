@@ -56,10 +56,10 @@ const UserEditScreen = () => {
       <PageTitle title={"Modifier le profile d'utilisateur"} />
 
       <Link to="/admin/userslist" className="btn btn-light my-3">
-        Go Back
+        Retourner
       </Link>
       <FormContainer>
-        <h1>Edit User Profil</h1>
+        <h1>Modifier le profil d'utilisateur</h1>
         {loadingUpdate && <Spinner />}
         {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
         {loading ? (
@@ -69,20 +69,20 @@ const UserEditScreen = () => {
         ) : (
           <Form onSubmit={submitHandler}>
             <Form.Group controlId="name">
-              <Form.Label>Name</Form.Label>
+              <Form.Label>Nom</Form.Label>
               <Form.Control
                 type="name"
-                placeholder="Enter name"
+                placeholder="Enter Nom"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
               ></Form.Control>
             </Form.Group>
             <Form.Group controlId="email" className="my-3">
-              <Form.Label>Email Address</Form.Label>
+              <Form.Label>Adresse Email</Form.Label>
               <Form.Control
                 type="email"
-                placeholder="Enter email"
+                placeholder="Entrer email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -92,14 +92,14 @@ const UserEditScreen = () => {
             <Form.Group controlId="isAdmin" className="my-3">
               <Form.Check
                 type="checkbox"
-                label="Is Admin"
+                label="Est administrateur"
                 checked={isAdmin}
                 onChange={(e) => setIsAdmin(e.target.checked)}
               ></Form.Check>
             </Form.Group>
 
-            <Button type="submit" variant="primary" className="mt-3">
-              Update
+            <Button type="submit" variant="primary" className="mt-3 rounded">
+              Mettre à jour
             </Button>
           </Form>
         )}

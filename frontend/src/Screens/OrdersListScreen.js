@@ -31,7 +31,7 @@ const OrdersListScreen = () => {
     <>
       <PageTitle title={"Liste des commandes"} />
 
-      <h1>Orders</h1>
+      <h1>Commandes</h1>
       {loading ? (
         <Spinner />
       ) : error ? (
@@ -41,13 +41,13 @@ const OrdersListScreen = () => {
           <thead>
             <tr>
               <th>ID</th>
-              <th>USER</th>
+              <th>UTILISATEURS</th>
               <th>DATE</th>
-              <th>TOTAL PRICE</th>
-              <th>PAID</th>
-              <th>DELIVERED</th>
-              <th>PAID AT</th>
-              <th>DELIVERED AT</th>
+              <th>PRIX TOTAL</th>
+              <th>PAYÉ</th>
+              <th>LIVRÉ</th>
+              <th>PAYÉ À</th>
+              <th>LIVRÉ À</th>
             </tr>
           </thead>
           <tbody>
@@ -56,9 +56,9 @@ const OrdersListScreen = () => {
                 <td>{order._id}</td>
                 <td>{order.user && order.user.name}</td>
                 <td>{order.createdAt.substring(0, 10)}</td>
-                <td>{order.totalPrice}</td>
-                <td>{order.isPaid ? "Yes" : "No"}</td>
-                <td>{order.isDelivered ? "Yes" : "No"}</td>
+                <td>{order.totalPrice} Dhs</td>
+                <td>{order.isPaid ? " Oui" : " Non"}</td>
+                <td>{order.isDelivered ? " Oui" : " Non"}</td>
                 <td>
                   {order.isPaid ? (
                     order.paidAt.substring(0, 10)
@@ -80,7 +80,7 @@ const OrdersListScreen = () => {
                 <td>
                   <LinkContainer to={`/order/${order._id}`}>
                     <Button variant="light" className="btn-sm">
-                      Details
+                      Détails
                     </Button>
                   </LinkContainer>
                 </td>

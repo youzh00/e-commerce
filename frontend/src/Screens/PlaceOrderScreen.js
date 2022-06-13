@@ -58,22 +58,22 @@ export const PlaceOrderScreen = () => {
         <Col md={8}>
           <ListGroup variant="flush">
             <ListGroup.Item>
-              <h2>Shipping</h2>
+              <h2>Adresse de livraison</h2>
               <p>
-                <strong> Address: </strong>
+                <strong> Adresse: </strong>
                 {shippingAddress.address}, {shippingAddress.city},{" "}
                 {shippingAddress.postalCode}, {shippingAddress.country}
               </p>
             </ListGroup.Item>
             <ListGroup.Item>
-              <h2>Payment Method</h2>
-              <strong>Method: </strong>
+              <h2>Méthode de payement</h2>
+              <strong>Méthode: </strong>
               {cart.paymentMethod}
             </ListGroup.Item>
             <ListGroup.Item>
-              <h2>Order Items</h2>
+              <h2>Articles Commandés</h2>
               {cartItems.length === 0 ? (
-                <Message>Your cart is empty</Message>
+                <Message>Pas de Commandes</Message>
               ) : (
                 <ListGroup variant="flush">
                   {cartItems.map((item, index) => (
@@ -93,8 +93,8 @@ export const PlaceOrderScreen = () => {
                           </Link>
                         </Col>
                         <Col md={4}>
-                          {item.qty} x ${item.price}=$
-                          {Number(item.qty) * Number(item.price)}
+                          {item.qty} x {item.price}Dhs=
+                          {Number(item.qty) * Number(item.price)}Dhs
                         </Col>
                       </Row>
                     </ListGroup.Item>
@@ -108,30 +108,30 @@ export const PlaceOrderScreen = () => {
           <Card>
             <ListGroup variant="flush">
               <ListGroup.Item>
-                <h2>Order Summary</h2>
+                <h2>Récapitulatif de la commande</h2>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>Items</Col>
-                  <Col>${cart.itemsPrice}</Col>
+                  <Col>Articles</Col>
+                  <Col>{cart.itemsPrice}Dhss</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>Shipping</Col>
-                  <Col>${cart.shippingPrice}</Col>
+                  <Col>Frais de livraison</Col>
+                  <Col>{cart.shippingPrice}Dhss</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>Tax</Col>
-                  <Col>${cart.taxPrice}</Col>
+                  <Col>Impôt</Col>
+                  <Col>{cart.taxPrice}Dhss</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
                   <Col>Total</Col>
-                  <Col>${cart.totalPrice}</Col>
+                  <Col>{cart.totalPrice}Dhss</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
@@ -144,7 +144,7 @@ export const PlaceOrderScreen = () => {
                   disabled={cartItems === 0}
                   onClick={placeOrderHandler}
                 >
-                  Place Order
+                  Commander
                 </Button>
               </ListGroup.Item>
             </ListGroup>

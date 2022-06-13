@@ -43,12 +43,12 @@ const deleteProduct = async (req, res) => {
 // create a new product by an admin
 const createProduct = async (req, res) => {
   const product = new Product({
-    name: "Product Name",
+    name: "Produit",
     price: 0,
     user: req.user._id,
     image: "/images/sample.jpg",
-    brand: "Brand",
-    category: "Category",
+    brand: "Marque",
+    category: "Catégorie",
     countInStock: 0,
     numReviews: 0,
     description: "Description",

@@ -42,41 +42,41 @@ const LoginScreen = () => {
     <>
       <PageTitle title={"Connexion "} />
       <FormContainer>
-        <h1>Sign In</h1>
+        <h1>Se Connecter</h1>
         {error && <Message variant="danger">{error}</Message>}
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="email">
-            <Form.Label>Email Address</Form.Label>
+            <Form.Label> Adresse Email</Form.Label>
             <Form.Control
               type="email"
-              placeholder="Enter email"
+              placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             ></Form.Control>
           </Form.Group>
 
           <Form.Group controlId="password">
-            <Form.Label>Password</Form.Label>
+            <Form.Label>Mot De Passe</Form.Label>
             <Form.Control
               type="password"
-              placeholder="Enter password"
+              placeholder="Mot De Passe"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             ></Form.Control>
           </Form.Group>
 
           <Button type="submit" variant="primary" className="mt-3">
-            Sign In
+            Se Connecter
           </Button>
         </Form>
 
         <Row className="py-3">
           <Col>
-            New Customer?{" "}
+            Nouveau client?{" "}
             <Link
               to={redirect ? `/register?redirect=${redirect}` : "/register"}
             >
-              Register
+              S'inscrire
             </Link>
           </Col>
         </Row>

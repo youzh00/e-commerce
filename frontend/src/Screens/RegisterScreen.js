@@ -48,25 +48,25 @@ const RegisterScreen = () => {
     <>
       <PageTitle title={"S'inscrire"} />
       <FormContainer>
-        <h1>Sign Up</h1>
+        <h1>S'inscrire</h1>
         {message && <Message variant="danger">{message}</Message>}
         {error && <Message variant="danger">{error}</Message>}
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="name">
-            <Form.Label>Name</Form.Label>
+            <Form.Label>Nom</Form.Label>
             <Form.Control
               type="name"
-              placeholder="Enter name"
+              placeholder="Nom"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
             ></Form.Control>
           </Form.Group>
           <Form.Group controlId="email">
-            <Form.Label>Email Address</Form.Label>
+            <Form.Label>Adresse Email</Form.Label>
             <Form.Control
               type="email"
-              placeholder="Enter email"
+              placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -74,36 +74,36 @@ const RegisterScreen = () => {
           </Form.Group>
 
           <Form.Group controlId="password">
-            <Form.Label>Password</Form.Label>
+            <Form.Label>Mot de Passe</Form.Label>
             <Form.Control
               required
               type="password"
-              placeholder="Enter password"
+              placeholder="Mot de Passe"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             ></Form.Control>
           </Form.Group>
           <Form.Group controlId="confirmPassword">
-            <Form.Label>Confirm Password</Form.Label>
+            <Form.Label>Confirmer Mot de Passe</Form.Label>
             <Form.Control
               type="password"
               required
-              placeholder="Confirm password"
+              placeholder="Confirmer Mot de Passe"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             ></Form.Control>
           </Form.Group>
 
           <Button type="submit" variant="primary" className="mt-3">
-            Sign Up
+            S'inscrire
           </Button>
         </Form>
 
         <Row className="py-3">
           <Col>
-            Have an Account?{" "}
+            Avoir un compte ?{" "}
             <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
-              Sign in
+              Se Connecter
             </Link>
           </Col>
         </Row>

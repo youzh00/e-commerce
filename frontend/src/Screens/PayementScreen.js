@@ -33,10 +33,10 @@ const PayementScreen = () => {
       <PageTitle title={"Mode de paiement"} />
       <FormContainer>
         <CheckOutSteps step1 step2 step3 />
-        <h1>Payment Method</h1>
+        <h1>Méthode de payement</h1>
         <Form onSubmit={submitHandler}>
           <Form.Group>
-            <Form.Label as="legend">Select Method</Form.Label>
+            <Form.Label as="legend">Sélectionnez la méthode</Form.Label>
             <Col>
               <Form.Check
                 type="radio"
@@ -60,7 +60,7 @@ const PayementScreen = () => {
           </Form.Group>
 
           <Button type="submit" variant="primary" className="my-3">
-            Continue
+            Continuer
           </Button>
         </Form>
       </FormContainer>

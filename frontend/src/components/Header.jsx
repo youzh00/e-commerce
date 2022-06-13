@@ -38,7 +38,7 @@ const Header = () => {
               <LinkContainer to="/cart">
                 <Nav.Link className={style.cart}>
                   <i className="fas fa-shopping-cart"></i>
-                  Cart
+                  Panier
                 </Nav.Link>
               </LinkContainer>
               {userInfo ? (
@@ -46,32 +46,32 @@ const Header = () => {
                   <LinkContainer to="/profile">
                     <NavDropdown.Item>Profile</NavDropdown.Item>
                   </LinkContainer>
+                  {userInfo && userInfo.isAdmin && (
+                    <>
+                  <LinkContainer to="admin/userslist">
+                    <NavDropdown.Item>Utilisateurs</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to="admin/productslist">
+                    <NavDropdown.Item>Produits</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to="admin/orderslist">
+                    <NavDropdown.Item>Commandes</NavDropdown.Item>
+                  </LinkContainer>
+                    </>
+                )
+              }
                   <NavDropdown.Item onClick={logoutHandler}>
-                    Logout
+                  Se déconnecter
                   </NavDropdown.Item>
                 </NavDropdown>
               ) : (
                 <LinkContainer to="/login">
                   <Nav.Link className={style.login}>
-                    <i className="fas fa-user"></i>Sign In
+                    <i className="fas fa-user"></i>Se connecter
                   </Nav.Link>
                 </LinkContainer>
               )}
-              {
-                userInfo && userInfo.isAdmin && (
-                  <NavDropdown title='admin' id="admin">
-                  <LinkContainer to="admin/userslist">
-                    <NavDropdown.Item>Users</NavDropdown.Item>
-                  </LinkContainer>
-                  <LinkContainer to="admin/productslist">
-                    <NavDropdown.Item>Products</NavDropdown.Item>
-                  </LinkContainer>
-                  <LinkContainer to="admin/orderslist">
-                    <NavDropdown.Item>Orders</NavDropdown.Item>
-                  </LinkContainer>
-                </NavDropdown>
-                )
-              }
+             
             </Nav>
           </Navbar.Collapse>
         </Container>

@@ -28,7 +28,7 @@ export const HomeScreen = () => {
     return (
       <>
         <PageTitle title={"Bienvenue à INPT-SHOP "} />
-        <h1> Latest Products </h1>
+        <h1> Derniers produits </h1>
         <Spinner />
       </>
     );
@@ -37,7 +37,7 @@ export const HomeScreen = () => {
     return (
       <>
         <PageTitle title={"Bienvenue à INPT-SHOP "} />
-        <h1> Latest Products </h1>
+        <h1> Derniers produits </h1>
         <Message variant="danger">{error}</Message>;
       </>
     );
@@ -47,7 +47,7 @@ export const HomeScreen = () => {
     <>
       <PageTitle title={"Bienvenue à INPT-SHOP "} />
       {!keyword && <ProductCarousel />}
-      <h1> Latest Products </h1>
+      <h1> Derniers produits </h1>
 
       <Row>
         {products.map((product) => (

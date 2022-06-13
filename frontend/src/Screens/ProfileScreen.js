@@ -63,9 +63,9 @@ const ProfileScreen = () => {
 
       <Row>
         <Col md={3}>
-          <h2>User Profile</h2>
+          <h2>Profil de l'utilisateur</h2>
           {message && <Message variant="danger">{message}</Message>}
-          {success && <Message variant="success">Profile Updated</Message>}
+          {success && <Message variant="success">Profil mis à jour</Message>}
           {loading ? (
             <Spinner />
           ) : error ? (
@@ -73,53 +73,53 @@ const ProfileScreen = () => {
           ) : (
             <Form onSubmit={submitHandler}>
               <Form.Group controlId="name">
-                <Form.Label>Name</Form.Label>
+                <Form.Label>Nom</Form.Label>
                 <Form.Control
                   type="name"
-                  placeholder="Enter name"
+                  placeholder="Entrer Nom"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 ></Form.Control>
               </Form.Group>
 
               <Form.Group controlId="email">
-                <Form.Label>Email Address</Form.Label>
+                <Form.Label>Adresse Email</Form.Label>
                 <Form.Control
                   type="email"
-                  placeholder="Enter email"
+                  placeholder="Entrer email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 ></Form.Control>
               </Form.Group>
 
               <Form.Group controlId="password">
-                <Form.Label>Password</Form.Label>
+                <Form.Label>Mot de passe</Form.Label>
                 <Form.Control
                   type="password"
-                  placeholder="Enter password"
+                  placeholder="Entrer Mot de passe"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 ></Form.Control>
               </Form.Group>
 
               <Form.Group controlId="confirmPassword">
-                <Form.Label>Confirm Password</Form.Label>
+                <Form.Label>Confirmer Mot de passe</Form.Label>
                 <Form.Control
                   type="password"
-                  placeholder="Confirm password"
+                  placeholder="Confirmer Mot de passe"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 ></Form.Control>
               </Form.Group>
 
-              <Button type="submit" variant="primary">
-                Update
+              <Button type="submit" variant="primary" className="my-2 rounded">
+                Mise à jour
               </Button>
             </Form>
           )}
         </Col>
         <Col md={9}>
-          <h2>My Orders</h2>
+          <h2>Mes Commandes</h2>
           {loadingOrders ? (
             <Spinner />
           ) : errorOrders ? (
@@ -131,8 +131,8 @@ const ProfileScreen = () => {
                   <th>ID</th>
                   <th>DATE</th>
                   <th>TOTAL</th>
-                  <th>PAID</th>
-                  <th>DELIVRED</th>
+                  <th>PAYÉ</th>
+                  <th>LIVRÉ</th>
                 </tr>
               </thead>
               <tbody>
@@ -140,7 +140,7 @@ const ProfileScreen = () => {
                   <tr key={order._id}>
                     <td>{order._id}</td>
                     <td>{order.createdAt.substring(0, 10)}</td>
-                    <td>{order.totalPrice}</td>
+                    <td>{order.totalPrice} Dhs</td>
                     <td>
                       {order.isPaid ? (
                         order.paidAt.substring(0, 10)
@@ -163,8 +163,11 @@ const ProfileScreen = () => {
                     </td>
                     <td>
                       <LinkContainer to={`/order/${order._id}`}>
-                        <Button className="btn-sm" variant="light">
-                          Details
+                        <Button
+                          className="btn-sm rounded-2 border border-info"
+                          variant="light"
+                        >
+                          Détails
                         </Button>
                       </LinkContainer>
                     </td>

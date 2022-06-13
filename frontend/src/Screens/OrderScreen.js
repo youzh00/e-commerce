@@ -99,14 +99,14 @@ export const OrderScreen = () => {
   ) : (
     <>
       <PageTitle title={"Commandes "} />
-      <h1>Order : {order._id}</h1>
+      <h1>Command : {order._id}</h1>
       <Row>
         <Col md={8}>
           <ListGroup variant="flush">
             <ListGroup.Item>
-              <h2>Shipping</h2>
+              <h2>Adresse de livraison</h2>
               <p>
-                <strong>Name: </strong>
+                <strong>Nom: </strong>
                 {order.user.name}
               </p>
 
@@ -122,29 +122,29 @@ export const OrderScreen = () => {
               </p>
               {order.isDelivered ? (
                 <Message variant="success">
-                  Delivered on {order.deliveredAt}
+                  Livrés le {order.deliveredAt}
                 </Message>
               ) : (
-                <Message variant="danger">Not Delivered</Message>
+                <Message variant="danger">Non livrés</Message>
               )}
             </ListGroup.Item>
             <ListGroup.Item>
-              <h2>Payment Method</h2>
+              <h2>Méthode de payement</h2>
               <p>
                 {" "}
-                <strong>Method: </strong>
+                <strong>Méthode: </strong>
                 {order.paymentMethod}
               </p>
               {order.isPaid ? (
-                <Message variant="success">Paid on {order.paidAt}</Message>
+                <Message variant="success">Payé le {order.paidAt}</Message>
               ) : (
-                <Message variant="danger">Not Paid</Message>
+                <Message variant="danger">Impayé</Message>
               )}
             </ListGroup.Item>
             <ListGroup.Item>
-              <h2>Order Items</h2>
+              <h2>Articles commandés</h2>
               {order.orderItems.length === 0 ? (
-                <Message>Order is empty</Message>
+                <Message>Pas de Commandes</Message>
               ) : (
                 <ListGroup variant="flush">
                   {order.orderItems.map((item, index) => (
@@ -164,8 +164,8 @@ export const OrderScreen = () => {
                           </Link>
                         </Col>
                         <Col md={4}>
-                          {item.qty} x ${item.price}=$
-                          {Number(item.qty) * Number(item.price)}
+                          {item.qty} x {item.price} Dhs=
+                          {Number(item.qty) * Number(item.price)} Dhs
                         </Col>
                       </Row>
                     </ListGroup.Item>
@@ -179,30 +179,30 @@ export const OrderScreen = () => {
           <Card>
             <ListGroup variant="flush">
               <ListGroup.Item>
-                <h2>Order Summary</h2>
+                <h2>Récapitulatif de la commande</h2>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>Items</Col>
-                  <Col>${order.itemsPrice}</Col>
+                  <Col>Articles</Col>
+                  <Col>{order.itemsPrice} Dhs</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>Shipping</Col>
-                  <Col>${order.shippingPrice}</Col>
+                  <Col>Frais de livraison</Col>
+                  <Col>{order.shippingPrice} Dhs</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>Tax</Col>
-                  <Col>${order.taxPrice}</Col>
+                  <Col>Impôt</Col>
+                  <Col>{order.taxPrice} Dhs</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
                   <Col>Total</Col>
-                  <Col>${order.totalPrice}</Col>
+                  <Col>{order.totalPrice} Dhs</Col>
                 </Row>
               </ListGroup.Item>
               {!order.isPaid && (
@@ -229,7 +229,7 @@ export const OrderScreen = () => {
                       className="btn btn-block"
                       onClick={deliverHandler}
                     >
-                      Mark as delivered
+                      Marquer comme livré
                     </Button>
                   </ListGroup.Item>
                 )}

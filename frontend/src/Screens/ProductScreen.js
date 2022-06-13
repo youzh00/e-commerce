@@ -66,7 +66,7 @@ export const ProductScreen = () => {
       <PageTitle title={"Produit"} />
 
       <a className="btn btn-dark my-3 rounded" href="/">
-        Go Back
+        Retourner
       </a>
       {loading ? (
         <Spinner />
@@ -99,25 +99,27 @@ export const ProductScreen = () => {
                 <ListGroup variant="flush">
                   <ListGroup.Item>
                     <Row>
-                      <Col>Price:</Col>
+                      <Col>Prix:</Col>
                       <Col>
-                        <strong>{product.price} $</strong>
+                        <strong>{product.price} Dhs</strong>
                       </Col>
                     </Row>
                   </ListGroup.Item>
 
                   <ListGroup.Item>
                     <Row>
-                      <Col>Status:</Col>
+                      <Col>Statut:</Col>
                       <Col>
-                        {product.countInStock > 0 ? "In Stock" : "Out Of Stock"}
+                        {product.countInStock > 0
+                          ? "En stock"
+                          : "En rupture de stock"}
                       </Col>
                     </Row>
                   </ListGroup.Item>
                   {product.countInStock > 0 && (
                     <ListGroup.Item>
                       <Row>
-                        <Col>Qty</Col>
+                        <Col>Quantité</Col>
                         <Col>
                           <Form.Control
                             as="select"
@@ -143,7 +145,7 @@ export const ProductScreen = () => {
                       type="button"
                       disabled={product.countInStock === 0}
                     >
-                      Add to cart
+                      Ajouter au panier
                     </Button>
                   </ListGroup.Item>
                 </ListGroup>
@@ -152,8 +154,8 @@ export const ProductScreen = () => {
           </Row>
           <Row className="my-4">
             <Col md={6}>
-              <h2>Reviews</h2>
-              {product.reviews.length === 0 && <Message>No Reviews</Message>}
+              <h2>Avis</h2>
+              {product.reviews.length === 0 && <Message>Aucun avis</Message>}
               <ListGroup variant="flush">
                 {product.reviews.map((review) => (
                   <ListGroup.Item key={review._id}>
@@ -164,7 +166,7 @@ export const ProductScreen = () => {
                   </ListGroup.Item>
                 ))}
                 <ListGroup className="my-2">
-                  <h2>Write a customer review</h2>
+                  <h2>Rédiger un commentaire</h2>
                   {errorReview && (
                     <Message variant="danger">{errorReview}</Message>
                   )}
@@ -179,16 +181,16 @@ export const ProductScreen = () => {
                             setRating(e.target.value);
                           }}
                         >
-                          <option value="">Select...</option>
-                          <option value="1">1 - Poor</option>
-                          <option value="2">2 - Fair</option>
-                          <option value="3">3 - Good</option>
-                          <option value="4">4 - Very Good</option>
+                          <option value="">Sélectionner...</option>
+                          <option value="1">1 - Pauvre</option>
+                          <option value="2">2 - Équitable</option>
+                          <option value="3">3 - Bien</option>
+                          <option value="4">4 - Très bien</option>
                           <option value="5">5 - Excellent</option>
                         </Form.Control>
                       </Form.Group>
                       <Form.Group controlId="comment">
-                        <Form.Label>Comment</Form.Label>
+                        <Form.Label>Commentaire</Form.Label>
                         <Form.Control
                           as="textarea"
                           row="3"
@@ -196,13 +198,14 @@ export const ProductScreen = () => {
                           onChange={(e) => setComment(e.target.value)}
                         ></Form.Control>
                       </Form.Group>
-                      <Button type="submit" variant="primary">
-                        Submit
+                      <Button type="submit" variant="primary" className="my-2">
+                        Commenter
                       </Button>
                     </Form>
                   ) : (
                     <Message>
-                      Please <Link to="/login">Sign In</Link> to write a review
+                      Veuillez vous <Link to="/login">connecter</Link> pour
+                      écrire un avis
                     </Message>
                   )}
                 </ListGroup>

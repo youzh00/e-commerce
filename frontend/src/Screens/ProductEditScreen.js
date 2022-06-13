@@ -100,10 +100,10 @@ const ProductEditScreen = () => {
       <PageTitle title={"Modification du produit"} />
 
       <Link to="/admin/productslist" className="btn btn-light my-3">
-        Go Back
+        Retourner
       </Link>
       <FormContainer>
-        <h1>Edit Product</h1>
+        <h1>Modifier le produit</h1>
         {loadingUpdate && <Spinner />}
         {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
         {loading ? (
@@ -113,20 +113,20 @@ const ProductEditScreen = () => {
         ) : (
           <Form onSubmit={submitHandler}>
             <Form.Group controlId="name">
-              <Form.Label>Name</Form.Label>
+              <Form.Label>Nom</Form.Label>
               <Form.Control
                 type="name"
-                placeholder="Enter name"
+                placeholder="Entrer Nom du produit"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
               ></Form.Control>
             </Form.Group>
             <Form.Group controlId="price" className="my-3">
-              <Form.Label>Price</Form.Label>
+              <Form.Label>Prix</Form.Label>
               <Form.Control
                 type="price"
-                placeholder="Enter Price"
+                placeholder=" Entrer Prix"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
                 required
@@ -137,7 +137,7 @@ const ProductEditScreen = () => {
               <Form.Label>Image</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter Image URL"
+                placeholder="Entrer Image URL"
                 value={image}
                 onChange={(e) => setImage(e.target.value)}
                 required
@@ -146,7 +146,7 @@ const ProductEditScreen = () => {
                 <Form.Control
                   type="file"
                   id="image-file"
-                  label="Choose file"
+                  label="Choisir le fichier"
                   onChange={uploadFileHandler}
                 />
               </Form.Group>
@@ -154,10 +154,10 @@ const ProductEditScreen = () => {
             </Form.Group>
 
             <Form.Group controlId="brand" className="my-3">
-              <Form.Label>Brand</Form.Label>
+              <Form.Label>Marque</Form.Label>
               <Form.Control
                 type="brand"
-                placeholder="Enter Brand "
+                placeholder="Entrer Marque "
                 value={brand}
                 onChange={(e) => setBrand(e.target.value)}
                 required
@@ -165,10 +165,10 @@ const ProductEditScreen = () => {
             </Form.Group>
 
             <Form.Group controlId="countInStock" className="my-3">
-              <Form.Label>Count In Stock</Form.Label>
+              <Form.Label> Stock</Form.Label>
               <Form.Control
                 type="countInStock"
-                placeholder="Enter Count "
+                placeholder="Entrer le nombre "
                 value={countInStock}
                 onChange={(e) => setCountInStock(e.target.value)}
                 required
@@ -176,10 +176,10 @@ const ProductEditScreen = () => {
             </Form.Group>
 
             <Form.Group controlId="category" className="my-3">
-              <Form.Label>Category</Form.Label>
+              <Form.Label>Catégorie</Form.Label>
               <Form.Control
                 type="category"
-                placeholder="Enter category "
+                placeholder="Entrer Catégorie "
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
                 required
@@ -190,7 +190,7 @@ const ProductEditScreen = () => {
               <Form.Label>Description</Form.Label>
               <Form.Control
                 type="description"
-                placeholder="Enter description "
+                placeholder="Entrer Description "
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 required
@@ -198,7 +198,7 @@ const ProductEditScreen = () => {
             </Form.Group>
 
             <Button type="submit" variant="primary" className="mt-3">
-              Update
+              Mise à jour
             </Button>
           </Form>
         )}
