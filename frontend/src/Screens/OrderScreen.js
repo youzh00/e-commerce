@@ -22,9 +22,10 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 export const OrderScreen = () => {
   const { id } = useParams();
+  console.log(id);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [sdkReady, setSdkReady] = useState(false);
+  const [sdkReady, setSdkReady] = useState(true);
 
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
@@ -48,19 +49,19 @@ export const OrderScreen = () => {
     if (!userInfo) {
       navigate("/login");
     }
-    const addPaypalScript = async () => {
-      const { data: clientId } = await axios.get(
-        "http://localhost:5000/config/paypal"
-      );
-      const script = document.createElement("script");
-      script.type = "text/javascript";
-      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
-      script.async = true;
-      script.onload = () => {
-        setSdkReady(true);
-      };
-      document.body.appendChild(script);
-    };
+    // const addPaypalScript = async () => {
+    //   const { data: clientId } = await axios.get(
+    //     "http://localhost:5000/config/paypal"
+    //   );
+    //   const script = document.createElement("script");
+    //   script.type = "text/javascript";
+    //   script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
+    //   script.async = true;
+    //   script.onload = () => {
+    //     setSdkReady(true);
+    //   };
+    //   document.body.appendChild(script);
+    // };
     // if there is no orde or it is already paid or already delivered
     if (!order || successPay || successDeliver) {
       dispatch({ type: ORDER_PAY_RESET });
@@ -68,14 +69,13 @@ export const OrderScreen = () => {
       dispatch(getOrderDetails(id));
     }
     // if the order not paid
-    else if (!order.isPaid) {
-      // if paypal script not there
-      if (!window.paypal) {
-        addPaypalScript();
-      } else {
-        setSdkReady(true);
-      }
-    }
+    // else if (!order.isPaid) {
+    //   // if paypal script not there
+    //   if (!window.paypal) {
+    //     addPaypalScript();
+    //   } else {
+    //     setSdkReady(true);
+    //   }}
   }, [dispatch, id, successPay, order, successDeliver, navigate, userInfo]);
 
   const successPaymentHandler = async (data, action) => {
@@ -233,6 +233,23 @@ export const OrderScreen = () => {
                       <PayPalButtons
                         style={{ layout: "vertical" }}
                         onApprove={successPaymentHandler}
+                        createOrder={(data, actions) => {
+                          return actions.order
+                            .create({
+                              purchase_units: [
+                                {
+                                  amount: {
+                                    currency_code: "USD",
+                                    value: order.totalPrice,
+                                  },
+                                },
+                              ],
+                            })
+                            .then((orderId) => {
+                              // Your code here after create the order
+                              return orderId;
+                            });
+                        }}
                       />
                     </PayPalScriptProvider>
                   )}
