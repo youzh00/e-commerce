@@ -75,7 +75,8 @@ export const OrderScreen = () => {
     //     addPaypalScript();
     //   } else {
     //     setSdkReady(true);
-    //   }}
+    //   }
+    // }
   }, [dispatch, id, successPay, order, successDeliver, navigate, userInfo]);
 
   const successPaymentHandler = async (data, action) => {
@@ -221,38 +222,34 @@ export const OrderScreen = () => {
               {!order.isPaid && (
                 <ListGroup.Item>
                   {loadingPay && <Spinner />}
-                  {!sdkReady ? (
-                    <Spinner />
-                  ) : (
-                    <PayPalScriptProvider
-                      options={{
-                        "client-id":
-                          "ARt9bm2mkL3ycW-vA2MqqWI2i49mLga46N0spTAu1DsmatEGkajDAIEw3cPaC0-A5XI20YAwy2WDWQeo",
-                      }}
-                    >
-                      <PayPalButtons
-                        style={{ layout: "vertical" }}
-                        onApprove={successPaymentHandler}
-                        createOrder={(data, actions) => {
-                          return actions.order
-                            .create({
-                              purchase_units: [
-                                {
-                                  amount: {
-                                    currency_code: "USD",
-                                    value: order.totalPrice,
-                                  },
+                  <PayPalScriptProvider
+                    options={{
+                      "client-id":
+                        "ARt9bm2mkL3ycW-vA2MqqWI2i49mLga46N0spTAu1DsmatEGkajDAIEw3cPaC0-A5XI20YAwy2WDWQeo",
+                    }}
+                  >
+                    <PayPalButtons
+                      style={{ layout: "vertical" }}
+                      onApprove={successPaymentHandler}
+                      createOrder={(data, actions) => {
+                        return actions.order
+                          .create({
+                            purchase_units: [
+                              {
+                                amount: {
+                                  currency_code: "USD",
+                                  value: order.totalPrice,
                                 },
-                              ],
-                            })
-                            .then((orderId) => {
-                              // Your code here after create the order
-                              return orderId;
-                            });
-                        }}
-                      />
-                    </PayPalScriptProvider>
-                  )}
+                              },
+                            ],
+                          })
+                          .then((orderId) => {
+                            // Your code here after create the order
+                            return orderId;
+                          });
+                      }}
+                    />
+                  </PayPalScriptProvider>
                 </ListGroup.Item>
               )}
               {loadingDeliver && <Spinner />}

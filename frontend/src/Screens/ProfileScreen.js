@@ -8,6 +8,7 @@ import Spinner from "../components/Spinner";
 import { getUserDetails, updateUserProfile } from "../actions/userActions";
 import { getUserOrdersList } from "../actions/orderActions";
 import PageTitle from "../components/PageTitle";
+import { USER_UPDATE_PROFILE_RESET } from "../constants/userConstants";
 
 const ProfileScreen = () => {
   const [name, setName] = useState("");
@@ -38,6 +39,7 @@ const ProfileScreen = () => {
       navigate("/login");
     } else {
       if (!user || !user.name || success) {
+        dispatch({ type: USER_UPDATE_PROFILE_RESET });
         dispatch(getUserDetails("profile"));
         dispatch(getUserOrdersList());
       } else {

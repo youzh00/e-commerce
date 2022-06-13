@@ -7,6 +7,8 @@ import Message from "../components/Message";
 import CheckOutSteps from "../components/CheckOutSteps.jsx";
 import { createdOrder } from "../actions/orderActions";
 import PageTitle from "../components/PageTitle";
+import { USER_DETAILS_RESET } from "../constants/userConstants";
+import { ORDER_CREATE_RESET } from "../constants/orderConstants";
 
 //!-------------Component Part-------------//
 
@@ -15,6 +17,13 @@ export const PlaceOrderScreen = () => {
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);
   const { shippingAddress, cartItems } = cart;
+
+  if (!cart.shippingAddress.address) {
+    navigate("/shipping");
+  } else if (!cart.paymentMethod) {
+    navigate("/payment");
+  }
+
   //* Calculate prices
   cart.itemsPrice = cartItems.reduce(
     (acc, item) => acc + item.price * item.qty,
@@ -46,7 +55,8 @@ export const PlaceOrderScreen = () => {
   useEffect(() => {
     if (success) {
       navigate(`/order/${order._id}`);
-      // dispatch({ type: USER_DETAILS_RESET });
+      dispatch({ type: USER_DETAILS_RESET });
+      dispatch({ type: ORDER_CREATE_RESET });
     }
     // eslint-disable-next-line
   }, [navigate, success]);
