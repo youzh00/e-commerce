@@ -82,7 +82,7 @@ const ProductsListScreen = () => {
           <h1>Produits</h1>
         </Col>
         <Col>
-          <Button className="my-3" onClick={createProductHandler}>
+          <Button className="my-3 rounded" onClick={createProductHandler}>
             <i className="fas fa-plus"></i> Créer un produit
           </Button>
         </Col>
@@ -118,13 +118,13 @@ const ProductsListScreen = () => {
                   <td>{product.brand}</td>
                   <td>
                     <LinkContainer to={`/admin/products/${product._id}/edit`}>
-                      <Button variant="light" className="btn-sm">
+                      <Button variant="light" className="btn-sm rounded">
                         <i className="fas fa-edit"></i>
                       </Button>
                     </LinkContainer>
                     <Button
                       variant="danger"
-                      className="btn-sm"
+                      className="btn-sm rounded"
                       onClick={() => deleteHandler(product._id)}
                     >
                       <i className="fas fa-trash"></i>

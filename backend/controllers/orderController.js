@@ -59,9 +59,9 @@ const updateOrderToPaid = async (req, res) => {
     order.paidAt = Date.now();
     order.paymentResult = {
       id: req.params.id,
-      status: req.body.status,
-      update_time: req.body.update_time,
-      email_address: req.body.payer.email_address,
+      status: "COMPLETED",
+      email_address: req.body.email_address,
+      name: req.body.name,
     };
     const updatedOrder = await order.save();
     res.json(updatedOrder);
@@ -75,6 +75,7 @@ const updateOrderToPaid = async (req, res) => {
 // get /orders/myorders
 //Private
 const getUserOrders = async (req, res) => {
+  console.log(req.user._id);
   const orders = await Order.find({ user: req.user._id });
   res.json(orders);
 };

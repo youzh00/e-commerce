@@ -164,7 +164,7 @@ const ProfileScreen = () => {
                     <td>
                       <LinkContainer to={`/order/${order._id}`}>
                         <Button
-                          className="btn-sm rounded-2 border border-info"
+                          className="btn-sm rounded-2 border border-info rounded"
                           variant="light"
                         >
                           Détails

@@ -87,6 +87,7 @@ const CartScreen = () => {
                     </Col>
                     <Col md={2}>
                       <Button
+                        className="rounded"
                         type="button"
                         variant="light"
                         onClick={() => removeFromCartHandler(item.product)}
@@ -124,7 +125,7 @@ const CartScreen = () => {
               <ListGroup.Item>
                 <Button
                   type="button"
-                  className="btn-block"
+                  className="btn-block rounded"
                   disabled={cartItems.length === 0}
                   onClick={checkoutHandler}
                 >

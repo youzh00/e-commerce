@@ -36,6 +36,7 @@ h2 {
 }
 
 .carousel img {
+  display: block;
   height: 300px;
   padding: 30px;
   margin: 40px;
@@ -44,7 +45,7 @@ h2 {
   margin-right: auto;
 }
 .carousel a {
-  margin: 0 450px;
+  margin: 0 auto;
 }
 @media (max-width: 900px) {
   .carousel-caption h2 {

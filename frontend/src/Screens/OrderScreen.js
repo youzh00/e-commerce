@@ -16,12 +16,12 @@ import {
   ORDER_DELIVER_RESET,
 } from "../constants/orderConstants";
 import PageTitle from "../components/PageTitle";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 //!-------------Component Part-------------//
 
 export const OrderScreen = () => {
   const { id } = useParams();
-  console.log(id);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [sdkReady, setSdkReady] = useState(false);
@@ -78,8 +78,18 @@ export const OrderScreen = () => {
     }
   }, [dispatch, id, successPay, order, successDeliver, navigate, userInfo]);
 
-  const successPaymentHandler = (paymentResult) => {
+  const successPaymentHandler = async (data, action) => {
+    const paymentResult = {};
+    const details = await action.order.capture();
+
+    paymentResult.status = "COMPLETED";
+    paymentResult.email_address = details.payer.email_address;
+    paymentResult.name =
+      details.payer.name.given_name + details.payer.name.surname;
+
+    console.log(paymentResult);
     dispatch(payOrder(id, paymentResult));
+    localStorage.removeItem("cartItems");
   };
 
   const deliverHandler = () => {
@@ -136,7 +146,10 @@ export const OrderScreen = () => {
                 {order.paymentMethod}
               </p>
               {order.isPaid ? (
-                <Message variant="success">Payé le {order.paidAt}</Message>
+                <Message variant="success">
+                  Payé le {order.paidAt.substring(0, 10)} -{" "}
+                  {order.paidAt.substring(11, 16)}
+                </Message>
               ) : (
                 <Message variant="danger">Impayé</Message>
               )}
@@ -211,10 +224,17 @@ export const OrderScreen = () => {
                   {!sdkReady ? (
                     <Spinner />
                   ) : (
-                    <PayPalButton
-                      amount={order.totalPrice}
-                      onSuccess={successPaymentHandler}
-                    />
+                    <PayPalScriptProvider
+                      options={{
+                        "client-id":
+                          "ARt9bm2mkL3ycW-vA2MqqWI2i49mLga46N0spTAu1DsmatEGkajDAIEw3cPaC0-A5XI20YAwy2WDWQeo",
+                      }}
+                    >
+                      <PayPalButtons
+                        style={{ layout: "vertical" }}
+                        onApprove={successPaymentHandler}
+                      />
+                    </PayPalScriptProvider>
                   )}
                 </ListGroup.Item>
               )}
@@ -226,7 +246,7 @@ export const OrderScreen = () => {
                   <ListGroup.Item>
                     <Button
                       type="button"
-                      className="btn btn-block"
+                      className="btn btn-block rounded"
                       onClick={deliverHandler}
                     >
                       Marquer comme livré

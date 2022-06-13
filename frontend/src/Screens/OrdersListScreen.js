@@ -79,7 +79,7 @@ const OrdersListScreen = () => {
                 </td>
                 <td>
                   <LinkContainer to={`/order/${order._id}`}>
-                    <Button variant="light" className="btn-sm">
+                    <Button variant="light" className="btn-sm rounded">
                       Détails
                     </Button>
                   </LinkContainer>

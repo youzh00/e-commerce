@@ -5,6 +5,7 @@ import style from "../Styles/Header.module.css";
 import { LinkContainer } from "react-router-bootstrap";
 import { logout } from "../actions/userActions";
 import { Search } from "./Search";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const userLogin = useSelector((state) => state.userLogin);
@@ -25,19 +26,19 @@ const Header = () => {
         className={style.navbar}
       >
         <Container>
-          <a href="/">
+          <Link to="/">
             <Navbar.Brand>INPT-SHOP</Navbar.Brand>
-          </a>
+          </Link>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse
             id="basic-navbar-nav"
-            className="justify-content-end"
+            className="justify-content-end gap-5"
           >
             <Search/>
-            <Nav className="ml-auto">
+            <Nav className="ml-auto gap-2">
               <LinkContainer to="/cart">
                 <Nav.Link className={style.cart}>
-                  <i className="fas fa-shopping-cart"></i>
+                  <i className="fas fa-shopping-cart me-1 "></i>
                   Panier
                 </Nav.Link>
               </LinkContainer>

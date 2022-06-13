@@ -140,7 +140,7 @@ export const PlaceOrderScreen = () => {
               <ListGroup.Item>
                 <Button
                   type="button"
-                  className="btn-block"
+                  className="btn-block rounded"
                   disabled={cartItems === 0}
                   onClick={placeOrderHandler}
                 >

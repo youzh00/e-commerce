@@ -141,7 +141,7 @@ export const ProductScreen = () => {
                   <ListGroup.Item>
                     <Button
                       onClick={addToCartHandler}
-                      className="btn-black"
+                      className="btn-black rounded"
                       type="button"
                       disabled={product.countInStock === 0}
                     >
@@ -198,7 +198,11 @@ export const ProductScreen = () => {
                           onChange={(e) => setComment(e.target.value)}
                         ></Form.Control>
                       </Form.Group>
-                      <Button type="submit" variant="primary" className="my-2">
+                      <Button
+                        type="submit"
+                        variant="primary"
+                        className="my-2 rounded"
+                      >
                         Commenter
                       </Button>
                     </Form>
