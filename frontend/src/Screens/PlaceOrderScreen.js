@@ -48,9 +48,12 @@ export const PlaceOrderScreen = () => {
 
   const orderCreate = useSelector((state) => state.orderCreate);
   const { order, success, error } = orderCreate;
+
+  console.log(order);
   const placeOrderHandler = () => {
     dispatch(createdOrder(orderedItems));
     console.log("placeOrderHandler");
+    navigate(`/order/${order._id}`);
   };
   useEffect(() => {
     if (success) {

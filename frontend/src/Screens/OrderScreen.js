@@ -30,6 +30,8 @@ export const OrderScreen = () => {
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
 
+  console.log(order);
+
   const orderPay = useSelector((state) => state.orderPay);
   const { success: successPay, loading: loadingPay } = orderPay;
 
@@ -49,34 +51,11 @@ export const OrderScreen = () => {
     if (!userInfo) {
       navigate("/login");
     }
-    // const addPaypalScript = async () => {
-    //   const { data: clientId } = await axios.get(
-    //     "http://localhost:5000/config/paypal"
-    //   );
-    //   const script = document.createElement("script");
-    //   script.type = "text/javascript";
-    //   script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
-    //   script.async = true;
-    //   script.onload = () => {
-    //     setSdkReady(true);
-    //   };
-    //   document.body.appendChild(script);
-    // };
-    // if there is no orde or it is already paid or already delivered
-    if (!order || successPay || successDeliver) {
+    if (!order || successPay || successDeliver || order._id !== id) {
       dispatch({ type: ORDER_PAY_RESET });
       dispatch({ type: ORDER_DELIVER_RESET });
       dispatch(getOrderDetails(id));
     }
-    // if the order not paid
-    // else if (!order.isPaid) {
-    //   // if paypal script not there
-    //   if (!window.paypal) {
-    //     addPaypalScript();
-    //   } else {
-    //     setSdkReady(true);
-    //   }
-    // }
   }, [dispatch, id, successPay, order, successDeliver, navigate, userInfo]);
 
   const successPaymentHandler = async (data, action) => {
@@ -244,7 +223,6 @@ export const OrderScreen = () => {
                             ],
                           })
                           .then((orderId) => {
-                            // Your code here after create the order
                             return orderId;
                           });
                       }}
