@@ -38,7 +38,7 @@ const PayementScreen = () => {
           <Form.Group>
             <Form.Label as="legend">Sélectionnez la méthode</Form.Label>
             <Col>
-              <Form.Check
+              {/* <Form.Check
                 type="radio"
                 label="PayPal or Credit Card"
                 id="PayPal"
@@ -46,13 +46,13 @@ const PayementScreen = () => {
                 value="PayPal"
                 checked
                 onChange={(e) => setPayementMethod(e.target.value)}
-              ></Form.Check>
+              ></Form.Check> */}
               <Form.Check
                 type="radio"
-                label="Stripe"
-                id="Stripe"
+                label="PayPal or Credit Card"
+                id="PayPal"
                 name="paymentMethod"
-                value="Stripe"
+                value="PayPal"
                 checked
                 onChange={(e) => setPayementMethod(e.target.value)}
               ></Form.Check>

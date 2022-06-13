@@ -67,9 +67,7 @@ export const OrderScreen = () => {
     paymentResult.name =
       details.payer.name.given_name + details.payer.name.surname;
 
-    console.log(paymentResult);
     dispatch(payOrder(id, paymentResult));
-    localStorage.removeItem("cartItems");
   };
 
   const deliverHandler = () => {
