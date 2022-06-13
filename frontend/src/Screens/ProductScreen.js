@@ -16,7 +16,10 @@ import Rating from "../components/Rating";
 import Spinner from "../components/Spinner";
 import Message from "../components/Message";
 import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
+import PageTitle from "../components/PageTitle";
+
 //!------------------Component Part--------------------//
+
 export const ProductScreen = () => {
   const navigate = useNavigate();
   const [qty, setQty] = useState(1);
@@ -60,6 +63,8 @@ export const ProductScreen = () => {
 
   return (
     <>
+      <PageTitle title={"Produit"} />
+
       <a className="btn btn-dark my-3 rounded" href="/">
         Go Back
       </a>

@@ -12,6 +12,7 @@ import {
   createProduct,
 } from "../actions/productActions";
 import { PRODUCT_CREATE_RESET } from "../constants/productConstants";
+import PageTitle from "../components/PageTitle";
 
 //!-------------Component-------------//
 
@@ -74,6 +75,8 @@ const ProductsListScreen = () => {
   };
   return (
     <>
+      <PageTitle title={"Liste de produits"} />
+
       <Row className="align-items-center">
         <Col>
           <h1>Products</h1>

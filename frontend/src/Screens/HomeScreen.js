@@ -7,6 +7,7 @@ import Message from "../components/Message";
 import { useDispatch, useSelector } from "react-redux";
 import { productsList } from "../actions/productActions";
 import Spinner from "../components/Spinner";
+import PageTitle from "../components/PageTitle";
 import { useParams } from "react-router-dom";
 import Paging from "../components/Paging";
 import { ProductCarousel } from "../components/ProductCarousel";
@@ -26,6 +27,7 @@ export const HomeScreen = () => {
   if (loading) {
     return (
       <>
+        <PageTitle title={"Bienvenue à INPT-SHOP "} />
         <h1> Latest Products </h1>
         <Spinner />
       </>
@@ -34,6 +36,7 @@ export const HomeScreen = () => {
   if (error) {
     return (
       <>
+        <PageTitle title={"Bienvenue à INPT-SHOP "} />
         <h1> Latest Products </h1>
         <Message variant="danger">{error}</Message>;
       </>
@@ -42,6 +45,7 @@ export const HomeScreen = () => {
 
   return (
     <>
+      <PageTitle title={"Bienvenue à INPT-SHOP "} />
       {!keyword && <ProductCarousel />}
       <h1> Latest Products </h1>
 

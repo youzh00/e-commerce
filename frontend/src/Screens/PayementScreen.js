@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import { savePayementMethod } from "../actions/cartActions";
 import CheckOutSteps from "../components/CheckOutSteps.jsx";
+import PageTitle from "../components/PageTitle";
 
 //!-------------Component Part-------------//
 const PayementScreen = () => {
@@ -29,6 +30,7 @@ const PayementScreen = () => {
 
   return (
     <>
+      <PageTitle title={"Mode de paiement"} />
       <FormContainer>
         <CheckOutSteps step1 step2 step3 />
         <h1>Payment Method</h1>

@@ -8,6 +8,7 @@ import FormContainer from "../components/FormContainer";
 import { set } from "mongoose";
 import { saveShippingAddress } from "../actions/cartActions";
 import CheckOutSteps from "../components/CheckOutSteps.jsx";
+import PageTitle from "../components/PageTitle";
 
 //!-------------Component Part-------------//
 const ShippingScreen = () => {
@@ -31,6 +32,8 @@ const ShippingScreen = () => {
 
   return (
     <>
+      <PageTitle title={"Adresse de livraison"} />
+
       <FormContainer>
         <CheckOutSteps step1 step2 />
         <h1>Shipping</h1>

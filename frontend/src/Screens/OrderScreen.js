@@ -15,6 +15,7 @@ import {
   ORDER_PAY_RESET,
   ORDER_DELIVER_RESET,
 } from "../constants/orderConstants";
+import PageTitle from "../components/PageTitle";
 
 //!-------------Component Part-------------//
 
@@ -86,11 +87,18 @@ export const OrderScreen = () => {
   };
 
   return loading ? (
-    <Spinner />
+    <>
+      <PageTitle title={"Commandes "} />
+      <Spinner />
+    </>
   ) : error ? (
-    <Message variant="danger">{error}</Message>
+    <>
+      <PageTitle title={"Commandes "} />
+      <Message variant="danger">{error}</Message>
+    </>
   ) : (
     <>
+      <PageTitle title={"Commandes "} />
       <h1>Order : {order._id}</h1>
       <Row>
         <Col md={8}>

@@ -6,7 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import CheckOutSteps from "../components/CheckOutSteps.jsx";
 import { createdOrder } from "../actions/orderActions";
+import PageTitle from "../components/PageTitle";
+
 //!-------------Component Part-------------//
+
 export const PlaceOrderScreen = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -49,6 +52,7 @@ export const PlaceOrderScreen = () => {
   }, [navigate, success]);
   return (
     <>
+      <PageTitle title={"Passer la commande"} />
       <CheckOutSteps step1 step2 step3 step4 />
       <Row>
         <Col md={8}>

@@ -6,6 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Spinner from "../components/Spinner";
 import { usersList, deleteUser } from "../actions/userActions";
+import PageTitle from "../components/PageTitle";
+
+//!-------------Component Part-------------//
+
 const UsersListScreen = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -33,6 +37,8 @@ const UsersListScreen = () => {
   };
   return (
     <>
+      <PageTitle title={"Liste des utilisateurs"} />
+
       <h1>Users</h1>
       {loading ? (
         <Spinner />

@@ -7,6 +7,7 @@ import Spinner from "../components/Spinner";
 import FormContainer from "../components/FormContainer";
 import { getUserDetails, updateUser } from "../actions/userActions";
 import { USER_UPDATE_RESET } from "../constants/userConstants";
+import PageTitle from "../components/PageTitle";
 
 const UserEditScreen = () => {
   const navigate = useNavigate();
@@ -52,6 +53,8 @@ const UserEditScreen = () => {
   }
   return (
     <>
+      <PageTitle title={"Modifier le profile d'utilisateur"} />
+
       <Link to="/admin/userslist" className="btn btn-light my-3">
         Go Back
       </Link>

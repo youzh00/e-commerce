@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Spinner from "../components/Spinner";
 import { ordersListAdmin } from "../actions/orderActions";
+import PageTitle from "../components/PageTitle";
 
 //!-------------Component Part-------------//
 
@@ -28,6 +29,8 @@ const OrdersListScreen = () => {
 
   return (
     <>
+      <PageTitle title={"Liste des commandes"} />
+
       <h1>Orders</h1>
       {loading ? (
         <Spinner />

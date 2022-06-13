@@ -8,6 +8,7 @@ import Spinner from "../components/Spinner";
 import FormContainer from "../components/FormContainer";
 import { productDetails, updateProduct } from "../actions/productActions";
 import { PRODUCT_UPDATE_RESET } from "../constants/productConstants";
+import PageTitle from "../components/PageTitle";
 
 //!-------------Component Part-------------/
 
@@ -96,6 +97,8 @@ const ProductEditScreen = () => {
   }
   return (
     <>
+      <PageTitle title={"Modification du produit"} />
+
       <Link to="/admin/productslist" className="btn btn-light my-3">
         Go Back
       </Link>
